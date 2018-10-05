@@ -333,13 +333,9 @@ public class CadastroProduto extends javax.swing.JFrame {
             
             
             JOptionPane.showMessageDialog(null,ProdutoDAO.cadastrar(p), "Cadastro de Produto", JOptionPane.PLAIN_MESSAGE);
-            try{
-               ProdutoDAO.adicionarProdutoBD(p);
-               ProdutoDAO.escreveProdutos();
-               ProdutoDAO.escreveProdutosBin();
-            }catch(IOException e){
-                JOptionPane.showMessageDialog(null, "Erro!" + e.getMessage(), "Erro no salvamento", JOptionPane.ERROR_MESSAGE);
-            }
+            ProdutoDAO.adicionarProdutoBD(p);
+            //ProdutoDAO.escreveProdutos();
+            //ProdutoDAO.escreveProdutosBin();
             
         }
     }//GEN-LAST:event_buttonCadastrarProdutoMouseClicked

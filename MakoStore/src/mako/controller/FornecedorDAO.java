@@ -81,7 +81,7 @@ public class FornecedorDAO implements java.io.Serializable{
         }
         return "Atualização realizada com sucesso!";
     }
-
+    /*
     public final static void leFornecedores() throws IOException {
         File log = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\fornecedor\\", "log_fornecedor.txt");
         FileReader leitor = new FileReader(log);
@@ -142,7 +142,7 @@ public class FornecedorDAO implements java.io.Serializable{
             JOptionPane.showMessageDialog(null, "Erro ao apagar arquivos: "+e, "Erro de remoção", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    */
     public final static boolean adicionarFornecedorBD(Fornecedor f){
         try{
             ConnectionFactory.acessaBD();

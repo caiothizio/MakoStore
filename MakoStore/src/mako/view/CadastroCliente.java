@@ -272,8 +272,8 @@ public class CadastroCliente extends javax.swing.JFrame implements java.io.Seria
             JOptionPane.showMessageDialog(null, ClienteDAO.cadastrar(c), "Cadastro de Cliente", JOptionPane.PLAIN_MESSAGE);
             try{
                 ClienteDAO.adicionarClienteBD(c);
-                ClienteDAO.escreveClientes();
-                ClienteDAO.escreveClientesBin();
+                //ClienteDAO.escreveClientes();
+                //ClienteDAO.escreveClientesBin();
             
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Erro!" + e.getMessage(), "Erro no salvamento", JOptionPane.ERROR_MESSAGE);

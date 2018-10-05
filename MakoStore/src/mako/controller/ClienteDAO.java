@@ -102,7 +102,7 @@ public class ClienteDAO implements java.io.Serializable{
         }
         return "Atualização realizada com sucesso!";
     }
-
+/*
     public static final void leClientes() throws IOException {
         File logTxt = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\cliente\\", "log_cliente.txt");
         FileReader leitor = new FileReader(logTxt);
@@ -172,6 +172,7 @@ public class ClienteDAO implements java.io.Serializable{
             JOptionPane.showMessageDialog(null, "Erro ao apagar arquivos: "+e, "Erro de remoção", JOptionPane.ERROR_MESSAGE);
         }
     }
+    */
     
     public static final boolean conectaBD(){
         return ConnectionFactory.acessaBD();

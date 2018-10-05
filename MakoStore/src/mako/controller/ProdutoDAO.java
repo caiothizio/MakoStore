@@ -103,7 +103,7 @@ public class ProdutoDAO implements java.io.Serializable{
             }
         }
     }
-
+/*
     public static final void escreveProdutos() throws IOException {
         File log = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\produto\\", "log_produto.txt");
         FileWriter escritor = new FileWriter(log, false);
@@ -141,7 +141,7 @@ public class ProdutoDAO implements java.io.Serializable{
             JOptionPane.showMessageDialog(null, "Erro ao apagar arquivos: "+e, "Erro de remoção", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+    */
     public static final boolean adicionarProdutoBD(Produto p){
         try{
             ConnectionFactory.acessaBD();

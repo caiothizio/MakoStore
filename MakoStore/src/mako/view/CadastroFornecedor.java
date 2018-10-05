@@ -378,13 +378,9 @@ public class CadastroFornecedor extends javax.swing.JFrame {
             }
             
             JOptionPane.showMessageDialog(null, FornecedorDAO.cadastrar(f), "Cadastro de Fornecedor", JOptionPane.PLAIN_MESSAGE);
-            try{
-                FornecedorDAO.adicionarFornecedorBD(f);
-                FornecedorDAO.escreveFornecedores();
-                FornecedorDAO.escreveFornecedoresBin();
-            }catch(IOException e){
-                JOptionPane.showMessageDialog(null, "Erro!" + e.getMessage(), "Erro no salvamento", JOptionPane.ERROR_MESSAGE);
-            }
+            FornecedorDAO.adicionarFornecedorBD(f);
+            //FornecedorDAO.escreveFornecedores();
+            //FornecedorDAO.escreveFornecedoresBin();
     }//GEN-LAST:event_buttonCadastrarFornecedorMouseClicked
   }
     

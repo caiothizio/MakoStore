@@ -111,32 +111,28 @@
                               <Component id="buttonLimparCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="buttonCadastrarCliente" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="labelContatoCliente" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="labelIdCliente" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="labelEndCliente" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="labelNomeCliente" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="labelCpfCnpjCliente" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="textNomeCliente" pref="484" max="32767" attributes="0"/>
-                                          <Component id="textEndCliente" max="32767" attributes="0"/>
-                                          <Component id="textIdCliente" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="textCpfCnpj" max="32767" attributes="0"/>
-                                          <Component id="textContatoCliente" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                          <Component id="labelContatoCliente" alignment="0" min="-2" pref="171" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="labelIdCliente" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="labelEndCliente" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="labelNomeCliente" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="labelCpfCnpjCliente" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="textNomeCliente" pref="484" max="32767" attributes="0"/>
+                                  <Component id="textEndCliente" max="32767" attributes="0"/>
+                                  <Component id="textIdCliente" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="textCpfCnpj" max="32767" attributes="0"/>
+                                  <Component id="textContatoCliente" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
