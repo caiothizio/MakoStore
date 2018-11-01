@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mako.controller.AcessaBD;
+import mako.controller.FornecedorBD;
 import mako.model.Fornecedor;
 
 /**
@@ -84,6 +85,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
         labelPag = new javax.swing.JLabel();
         labelTipo = new javax.swing.JLabel();
         labelPes = new javax.swing.JLabel();
+        labelPes1 = new javax.swing.JLabel();
 
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,6 +272,8 @@ public class BancoFornecedores extends javax.swing.JFrame {
 
         labelPes.setText("Pessoa:");
 
+        labelPes1.setText("Obs:");
+
         javax.swing.GroupLayout painelCamposFornecedorLayout = new javax.swing.GroupLayout(painelCamposFornecedor);
         painelCamposFornecedor.setLayout(painelCamposFornecedorLayout);
         painelCamposFornecedorLayout.setHorizontalGroup(
@@ -297,15 +301,38 @@ public class BancoFornecedores extends javax.swing.JFrame {
                         .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonNome)))
-                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPes, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelTipo, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
+                                .addComponent(radioAli)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioML)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioWish)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioOutros))
+                            .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
+                                .addComponent(radioJuridica)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioFisica)))
+                        .addGap(40, 40, 40))
                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
+                                .addComponent(labelPes1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
                                 .addComponent(buttonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(buttonAtt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
                                 .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labelEndereco)
@@ -329,27 +356,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
                                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
                                         .addComponent(labelNome)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfNome))))))
-                    .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelPes, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelTipo, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                                .addComponent(radioAli)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioML)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioWish)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioOutros))
-                            .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                                .addComponent(radioJuridica)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioFisica)))
-                        .addGap(40, 40, 40)))
+                                        .addComponent(tfNome)))))))
                 .addContainerGap())
         );
         painelCamposFornecedorLayout.setVerticalGroup(
@@ -396,8 +403,10 @@ public class BancoFornecedores extends javax.swing.JFrame {
                             .addComponent(radioFisica)
                             .addComponent(radioJuridica)
                             .addComponent(labelPes))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(labelPes1)
+                        .addGap(5, 5, 5)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -541,7 +550,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
         }
         String obs = tfObs.getText();
 
-        boolean resp = AcessaBD.executaUpdateFornecedor(id, nome, endereco, contato, pagina, tipo, tipopes, obs, oldId);
+        boolean resp = FornecedorBD.executaUpdateFornecedor(id, nome, endereco, contato, pagina, tipo, tipopes, obs, oldId);
 
         if (!resp) {
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);
@@ -800,6 +809,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelPag;
     private javax.swing.JLabel labelPes;
+    private javax.swing.JLabel labelPes1;
     private javax.swing.JLabel labelTipo;
     private javax.swing.JPanel painelCamposFornecedor;
     private javax.swing.JPanel painelFornecedor;

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mako.controller.AcessaBD;
+import mako.controller.ClienteBD;
 import mako.model.Cliente;
 
 /**
@@ -427,7 +428,7 @@ public class BancoClientes extends javax.swing.JFrame{
         String cpfcnpj = tfCpfCnpj.getText();
         String obs = tfObs.getText();
         
-        boolean resp = AcessaBD.executaUpdateCliente(id, nome, endereco, contato, cpfcnpj, obs, oldId);
+        boolean resp = ClienteBD.executaUpdateCliente(id, nome, endereco, contato, cpfcnpj, obs, oldId);
         
         if(!resp){
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);

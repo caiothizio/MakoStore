@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mako.controller.AcessaBD;
+import mako.controller.ProdutoBD;
 import mako.model.Produto;
 
 /**
@@ -444,7 +445,7 @@ public class BancoProdutos extends javax.swing.JFrame{
         
         String obs = tfObs.getText();
         
-        boolean resp = AcessaBD.executaUpdateProduto(id, nome, custo, revenda, qtde, tipo, obs, oldId);
+        boolean resp = ProdutoBD.executaUpdateProduto(id, nome, custo, revenda, qtde, tipo, obs, oldId);
         
         if(!resp){
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);
