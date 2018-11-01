@@ -42,6 +42,8 @@ public class BancoFornecedores extends javax.swing.JFrame{
         buttonGroupFornecedor = new javax.swing.ButtonGroup();
         buttonGrouptipoPes = new javax.swing.ButtonGroup();
         jTextField7 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         painelFornecedor = new javax.swing.JPanel();
         labelFornecedor = new javax.swing.JLabel();
         painelCamposFornecedor = new javax.swing.JPanel();
@@ -73,6 +75,13 @@ public class BancoFornecedores extends javax.swing.JFrame{
         radioAli = new javax.swing.JRadioButton();
         radioOutros = new javax.swing.JRadioButton();
         radioWish = new javax.swing.JRadioButton();
+        labelID = new javax.swing.JLabel();
+        labelNome = new javax.swing.JLabel();
+        labelEndereco = new javax.swing.JLabel();
+        labelCont = new javax.swing.JLabel();
+        labelPag = new javax.swing.JLabel();
+        labelTipo = new javax.swing.JLabel();
+        labelPes = new javax.swing.JLabel();
 
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,12 +89,26 @@ public class BancoFornecedores extends javax.swing.JFrame{
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Fornecedor");
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         painelFornecedor.setBackground(new java.awt.Color(0, 204, 204));
         painelFornecedor.setForeground(new java.awt.Color(255, 255, 255));
+        painelFornecedor.setName("Banco de Fornecedores"); // NOI18N
 
         labelFornecedor.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelFornecedor.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,6 +158,11 @@ public class BancoFornecedores extends javax.swing.JFrame{
         buttonSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonSairMouseClicked(evt);
+            }
+        });
+        buttonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSairActionPerformed(evt);
             }
         });
 
@@ -193,11 +221,11 @@ public class BancoFornecedores extends javax.swing.JFrame{
         });
 
         buttonGrouptipoPes.add(radioFisica);
-        radioFisica.setText("PF");
+        radioFisica.setText("Física");
         radioFisica.setEnabled(false);
 
         buttonGrouptipoPes.add(radioJuridica);
-        radioJuridica.setText("PJ");
+        radioJuridica.setText("Jurídica");
         radioJuridica.setEnabled(false);
 
         buttonGroupFornecedor.add(radioML);
@@ -226,14 +254,35 @@ public class BancoFornecedores extends javax.swing.JFrame{
         radioWish.setText("Wish");
         radioWish.setEnabled(false);
 
+        labelID.setText("ID:");
+
+        labelNome.setText("Nome:");
+
+        labelEndereco.setText("Endereço:");
+
+        labelCont.setText("Contato:");
+
+        labelPag.setText("Página:");
+
+        labelTipo.setText("Tipo:");
+
+        labelPes.setText("Pessoa:");
+
         javax.swing.GroupLayout painelCamposFornecedorLayout = new javax.swing.GroupLayout(painelCamposFornecedor);
         painelCamposFornecedor.setLayout(painelCamposFornecedorLayout);
         painelCamposFornecedorLayout.setHorizontalGroup(
             painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(26, 26, 26)
                 .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                    .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
+                        .addComponent(buttonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addComponent(buttonAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonApagar))
+                    .addComponent(buttonTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -245,33 +294,46 @@ public class BancoFornecedores extends javax.swing.JFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonNome))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
-                        .addComponent(buttonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonAlterar)
-                        .addGap(91, 91, 91)
-                        .addComponent(buttonApagar))
-                    .addComponent(buttonTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfEnd)
-                    .addComponent(tfCont)
-                    .addComponent(tfPagina, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
-                        .addComponent(buttonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonAtt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3)
+                        .addComponent(buttonNome)))
+                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                        .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(34, 34, 34)
                         .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
+                                .addComponent(buttonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(buttonAtt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
+                                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelEndereco)
+                                    .addComponent(labelCont)
+                                    .addComponent(labelPag))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfPagina, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfCont, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfEnd)))
                             .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                                .addComponent(labelAtt)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(tfNome)))
+                                .addGap(3, 3, 3)
+                                .addComponent(labelID)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
+                                        .addComponent(labelAtt)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
+                                        .addComponent(labelNome)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfNome))))))
                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPes, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelTipo, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
                                 .addComponent(radioAli)
@@ -282,100 +344,101 @@ public class BancoFornecedores extends javax.swing.JFrame{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(radioOutros))
                             .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                                .addComponent(radioFisica)
+                                .addComponent(radioJuridica)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioJuridica)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(radioFisica)))
+                        .addGap(40, 40, 40)))
                 .addContainerGap())
         );
         painelCamposFornecedorLayout.setVerticalGroup(
             painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonID)
-                            .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonNome)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposFornecedorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelAtt)))
+                .addGap(34, 34, 34)
+                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelAtt)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonID)
+                    .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonNome))
                 .addGap(18, 18, 18)
                 .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
                         .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelID)
+                            .addComponent(labelNome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelEndereco))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCont))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelPag))
                         .addGap(18, 18, 18)
                         .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(radioAli)
                             .addComponent(radioML)
                             .addComponent(radioWish)
-                            .addComponent(radioOutros))
+                            .addComponent(radioOutros)
+                            .addComponent(labelTipo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(radioFisica)
-                            .addComponent(radioJuridica))
+                            .addComponent(radioJuridica)
+                            .addComponent(labelPes))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonAtt)
-                            .addComponent(buttonCancelar))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelCamposFornecedorLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonTodos)
-                        .addGap(26, 26, 26)
-                        .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonApagar)
-                            .addComponent(buttonSair)
-                            .addComponent(buttonAlterar))
-                        .addContainerGap(26, Short.MAX_VALUE))))
+                        .addComponent(buttonTodos)))
+                .addGap(26, 26, 26)
+                .addGroup(painelCamposFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonApagar)
+                    .addComponent(buttonSair)
+                    .addComponent(buttonAlterar)
+                    .addComponent(buttonCancelar)
+                    .addComponent(buttonAtt))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout painelFornecedorLayout = new javax.swing.GroupLayout(painelFornecedor);
         painelFornecedor.setLayout(painelFornecedorLayout);
         painelFornecedorLayout.setHorizontalGroup(
             painelFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(painelCamposFornecedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(painelFornecedorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(painelCamposFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(painelFornecedorLayout.createSequentialGroup()
-                .addGap(381, 381, 381)
+                .addGap(388, 388, 388)
                 .addComponent(labelFornecedor)
-                .addContainerGap(432, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelFornecedorLayout.setVerticalGroup(
             painelFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFornecedorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(labelFornecedor)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(painelCamposFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(painelFornecedor);
+        painelFornecedor.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTodosMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor"));
+            mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor order by fornecedor_id"));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -553,6 +616,10 @@ public class BancoFornecedores extends javax.swing.JFrame{
     private void radioMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMLActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioMLActionPerformed
+
+    private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonSairActionPerformed
     
     public void preencheCampos(String id) throws SQLException{
         ResultSet rs = AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_id = " +id);
@@ -704,10 +771,19 @@ public class BancoFornecedores extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel labelAtt;
+    private javax.swing.JLabel labelCont;
+    private javax.swing.JLabel labelEndereco;
     private javax.swing.JLabel labelFornecedor;
+    private javax.swing.JLabel labelID;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelPag;
+    private javax.swing.JLabel labelPes;
+    private javax.swing.JLabel labelTipo;
     private javax.swing.JPanel painelCamposFornecedor;
     private javax.swing.JPanel painelFornecedor;
     private javax.swing.JRadioButton radioAli;
