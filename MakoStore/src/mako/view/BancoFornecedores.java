@@ -21,8 +21,10 @@ import mako.model.Fornecedor;
  *
  * @author CaioThizio
  */
-public class BancoFornecedores extends javax.swing.JFrame{
+public class BancoFornecedores extends javax.swing.JFrame {
+
     private Fornecedor f = new Fornecedor();
+
     /**
      * Creates new form CadastroProduto
      */
@@ -440,7 +442,7 @@ public class BancoFornecedores extends javax.swing.JFrame{
         try {
             mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor order by fornecedor_id"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
+            JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
         }
     }//GEN-LAST:event_buttonTodosMouseClicked
 
@@ -448,7 +450,7 @@ public class BancoFornecedores extends javax.swing.JFrame{
         try {
             mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_id = " + textID.getText()));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
+            JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
         }
     }//GEN-LAST:event_buttonIDMouseClicked
 
@@ -456,7 +458,7 @@ public class BancoFornecedores extends javax.swing.JFrame{
         try {
             mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_nome = '" + textNome.getText() + "'"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
+            JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
         }
     }//GEN-LAST:event_buttonNomeMouseClicked
 
@@ -466,92 +468,93 @@ public class BancoFornecedores extends javax.swing.JFrame{
 
     private void buttonApagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonApagarMouseClicked
         int row = tabelaFornecedores.getSelectedRow();
-        
-        if(row == -1){
+
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Por favor, selecione um registro na tabela para ser apagado.", "Selecionar registro", 0);
             return;
         }
-       
+
         Object idObj = tabelaFornecedores.getValueAt(row, 0);
         String id = idObj.toString();
-        
-        if(JOptionPane.showConfirmDialog(null, "Tem certeza que gostaria de apagar o fornecedor de id "+id+"?", "Apagar Fornecedor", JOptionPane.YES_NO_OPTION) != 0)
+
+        if (JOptionPane.showConfirmDialog(null, "Tem certeza que gostaria de apagar o fornecedor de id " + id + "?", "Apagar Fornecedor", JOptionPane.YES_NO_OPTION) != 0) {
             return;
-        
+        }
+
         boolean resp = AcessaBD.executaDelete(id, "fornecedor");
-        
-        if(!resp){
+
+        if (!resp) {
             JOptionPane.showMessageDialog(null, "Erro de deleção.", "Erro de deleção", 0);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Registro deletado com sucesso.", "Deletar registro", -1);
-            
+
             try {
                 mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor"));
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
+                JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
             }
         }
-  
+
     }//GEN-LAST:event_buttonApagarMouseClicked
-    
+
     private void buttonAttMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAttMouseClicked
         int row = tabelaFornecedores.getSelectedRow();
-        
-        if(row == -1){
+
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Por favor, selecione um registro na tabela para ser apagado.", "Selecionar registro", 0);
             return;
         }
-       
+
         Object idObj = tabelaFornecedores.getValueAt(row, 0);
         String oldId = idObj.toString();
-        
+
         String id = tfID.getText();
         String nome = tfNome.getText();
         String endereco = tfEnd.getText();
         String contato = tfCont.getText();
         String pagina = tfPagina.getText();
         String tipo = "";
-        if(radioAli.isSelected()){
+        if (radioAli.isSelected()) {
             tipo = "AliExpress";
         }
-        
-        if(radioML.isSelected()){
+
+        if (radioML.isSelected()) {
             tipo = "Mercado Livre";
         }
-        
-        if(radioWish.isSelected()){
+
+        if (radioWish.isSelected()) {
             tipo = "Wish";
         }
-                
-        if(radioOutros.isSelected()){
+
+        if (radioOutros.isSelected()) {
             tipo = "Outros";
         }
-        
+
         String tipopes = "";
-        
-        if(radioFisica.isSelected()){
+
+        if (radioFisica.isSelected()) {
             tipopes = "Pessoa Física";
         }
-        
-        if(radioJuridica.isSelected()){
+
+        if (radioJuridica.isSelected()) {
             tipopes = "Pessoa Jurídica";
         }
         String obs = tfObs.getText();
-        
+
         boolean resp = AcessaBD.executaUpdateFornecedor(id, nome, endereco, contato, pagina, tipo, tipopes, obs, oldId);
-        
-        if(!resp){
+
+        if (!resp) {
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso.", "Atualizar registro", -1);
-            
+
             tfID.setText("");
             tfNome.setText("");
             tfEnd.setText("");
             tfCont.setText("");
             tfPagina.setText("");
             tfObs.setText("");
-        
+
             tfID.setEnabled(false);
             tfNome.setEnabled(false);
             tfEnd.setEnabled(false);
@@ -560,11 +563,20 @@ public class BancoFornecedores extends javax.swing.JFrame{
             tfObs.setEnabled(false);
             buttonCancelar.setEnabled(false);
             buttonAtt.setEnabled(false);
-            
+            radioML.setEnabled(false);
+            radioWish.setEnabled(false);
+            radioAli.setEnabled(false);
+            radioOutros.setEnabled(false);
+            radioFisica.setEnabled(false);
+            radioJuridica.setEnabled(false);
+
+            buttonGroupFornecedor.clearSelection();
+            buttonGrouptipoPes.clearSelection();
+
             try {
                 mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor"));
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
+                JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
             }
         }
     }//GEN-LAST:event_buttonAttMouseClicked
@@ -580,28 +592,37 @@ public class BancoFornecedores extends javax.swing.JFrame{
         tfCont.setText("");
         tfPagina.setText("");
         tfObs.setText("");
-        
+
         tfID.setEnabled(false);
         tfNome.setEnabled(false);
         tfEnd.setEnabled(false);
         tfCont.setEnabled(false);
         tfPagina.setEnabled(false);
         tfObs.setEnabled(false);
+        radioML.setEnabled(false);
+        radioWish.setEnabled(false);
+        radioAli.setEnabled(false);
+        radioOutros.setEnabled(false);
+        radioFisica.setEnabled(false);
+        radioJuridica.setEnabled(false);
         buttonCancelar.setEnabled(false);
         buttonAtt.setEnabled(false);
+
+        buttonGroupFornecedor.clearSelection();
+        buttonGrouptipoPes.clearSelection();
     }//GEN-LAST:event_buttonCancelarMouseClicked
 
     private void buttonAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAlterarMouseClicked
         int row = tabelaFornecedores.getSelectedRow();
-        
-        if(row == -1){
+
+        if (row == -1) {
             JOptionPane.showMessageDialog(null, "Por favor, selecione um registro na tabela para ser apagado.", "Selecionar registro", 0);
             return;
         }
-       
+
         Object idObj = tabelaFornecedores.getValueAt(row, 0);
         String id = idObj.toString();
-        
+
         try {
             preencheCampos(id);
         } catch (SQLException ex) {
@@ -620,14 +641,14 @@ public class BancoFornecedores extends javax.swing.JFrame{
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonSairActionPerformed
-    
-    public void preencheCampos(String id) throws SQLException{
-        ResultSet rs = AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_id = " +id);
+
+    public void preencheCampos(String id) throws SQLException {
+        ResultSet rs = AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_id = " + id);
         ResultSetMetaData rsmd = rs.getMetaData();
         ArrayList<String> reg = new ArrayList<>();
-        
+
         rs.next();
-        
+
         tfID.setEnabled(true);
         tfNome.setEnabled(true);
         tfEnd.setEnabled(true);
@@ -642,11 +663,11 @@ public class BancoFornecedores extends javax.swing.JFrame{
         radioOutros.setEnabled(true);
         buttonCancelar.setEnabled(true);
         buttonAtt.setEnabled(true);
-        
+
         do {
-                reg = ProximoRegistro(rs, rsmd);
-            } while (rs.next());
-        
+            reg = ProximoRegistro(rs, rsmd);
+        } while (rs.next());
+
         tfID.setText(reg.get(0));
         tfNome.setText(reg.get(1));
         tfEnd.setText(reg.get(2));
@@ -655,13 +676,13 @@ public class BancoFornecedores extends javax.swing.JFrame{
         String pes = reg.get(6);
         String tipo = reg.get(5);
         tfObs.setText(reg.get(7));
-        if(pes.equals("Pessoa Física")){
+        if (pes.equals("Pessoa Física")) {
             radioFisica.setSelected(true);
-        }else{
+        } else {
             radioJuridica.setSelected(true);
         }
-        
-        switch(tipo){
+
+        switch (tipo) {
             case "AliExpress":
                 radioAli.setSelected(true);
                 break;
@@ -675,25 +696,25 @@ public class BancoFornecedores extends javax.swing.JFrame{
                 radioOutros.setSelected(true);
                 break;
         }
-          
+
     }
-    
-    public void mostraDados(ResultSet rs) throws SQLException{
-        
-        if(!rs.first()){
+
+    public void mostraDados(ResultSet rs) throws SQLException {
+
+        if (!rs.first()) {
             JOptionPane.showMessageDialog(this, "Não há dados na tabela.");
             DefaultTableModel tableModel = new DefaultTableModel(0, 0);
-            
+
             tabelaFornecedores.setModel(tableModel);
             return;
         }
-        
+
         ArrayList<String> cab = new ArrayList<>();
         ArrayList<String> reg = new ArrayList<>();
         ArrayList<ArrayList<String>> regs = new ArrayList<>();
-        
+
         try {
-            
+
             ResultSetMetaData rsmd = rs.getMetaData();
             for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                 cab.add(rsmd.getColumnName(i));
@@ -703,59 +724,55 @@ public class BancoFornecedores extends javax.swing.JFrame{
                 reg = ProximoRegistro(rs, rsmd);
                 regs.add(reg);
             } while (rs.next());
-            
-            
-            
+
             String col[] = new String[cab.size()];
-            
-            for(int i = 0 ; i < cab.size() ; i++){
-                 col[i] = cab.get(i);
+
+            for (int i = 0; i < cab.size(); i++) {
+                col[i] = cab.get(i);
             }
-            
+
             DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-            
+
             tabelaFornecedores.setModel(tableModel);
-            
+
             Object[] objs = new Object[cab.size()];
-            
-            for(ArrayList<String> array : regs){
-                for(String valor : array){
+
+            for (ArrayList<String> array : regs) {
+                for (String valor : array) {
                     objs[array.indexOf(valor)] = valor;
                 }
                 tableModel.addRow(objs);
             }
-            
-           
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao exibir tabela: " +e, "Erro tabela", 0);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao montar tabela: \n\n" +e, "Erro montagem", 0);
+            JOptionPane.showMessageDialog(null, "Erro ao exibir tabela: " + e, "Erro tabela", 0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao montar tabela: \n\n" + e, "Erro montagem", 0);
         }
-        
+
     }
-    
+
     private ArrayList<String> ProximoRegistro(ResultSet rs, ResultSetMetaData rsmd) throws SQLException {
         ArrayList<String> registro = new ArrayList<>();
         for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-            
+
             if (rsmd.getColumnType(i) == Types.VARCHAR || rsmd.getColumnClassName(i).equalsIgnoreCase("java.lang.String")) {//para string
                 registro.add(rs.getString(i));
             } else if (rsmd.getColumnType(i) == Types.INTEGER) {
                 registro.add(Integer.toString(rs.getInt(i)));
-            } else if (rsmd.getColumnType(i) == Types.DOUBLE){
+            } else if (rsmd.getColumnType(i) == Types.DOUBLE) {
                 registro.add(Double.toString(rs.getDouble(i)));
-            }else{
-                
+            } else {
+
             }
         }
         return registro;
     }
-    
-    public void preencheFields(){
-        
+
+    public void preencheFields() {
+
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAlterar;
