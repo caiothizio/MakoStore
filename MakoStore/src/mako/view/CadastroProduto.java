@@ -6,6 +6,7 @@
 package mako.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import mako.controller.ProdutoDAO;
 import mako.controller.Relatorio;
@@ -18,13 +19,14 @@ import mako.model.Produto;
  */
 public class CadastroProduto extends javax.swing.JFrame {
     private Produto p = new Produto();
+    public static ArrayList<String> tipos;
     /**
      * Creates new form CadastroProduto
      */
     public CadastroProduto() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,8 +59,8 @@ public class CadastroProduto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textAreaObsProduto = new javax.swing.JTextArea();
         textQtde = new javax.swing.JTextField();
-        textTipo = new javax.swing.JTextField();
         buttonrRelatorioC = new javax.swing.JButton();
+        comboBoxTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Produto");
@@ -156,12 +158,6 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        textTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textTipoActionPerformed(evt);
-            }
-        });
-
         buttonrRelatorioC.setText("Relatório de Produtos");
         buttonrRelatorioC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -173,6 +169,8 @@ public class CadastroProduto extends javax.swing.JFrame {
                 buttonrRelatorioCActionPerformed(evt);
             }
         });
+
+        popularComboBox();
 
         javax.swing.GroupLayout painelCamposProdutoLayout = new javax.swing.GroupLayout(painelCamposProduto);
         painelCamposProduto.setLayout(painelCamposProdutoLayout);
@@ -222,13 +220,13 @@ public class CadastroProduto extends javax.swing.JFrame {
                                 .addComponent(buttonLimparProduto)
                                 .addGap(99, 99, 99)
                                 .addComponent(buttonCadastrarProduto))
-                            .addComponent(textTipo)
                             .addGroup(painelCamposProdutoLayout.createSequentialGroup()
-                                .addGroup(painelCamposProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(painelCamposProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                                    .addComponent(textQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         painelCamposProdutoLayout.setVerticalGroup(
             painelCamposProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,14 +259,11 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGroup(painelCamposProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelQtdProduto)
                     .addComponent(textQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(painelCamposProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelCamposProdutoLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(labelTipoProduto))
-                    .addGroup(painelCamposProdutoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(53, 53, 53)
+                .addGap(19, 19, 19)
+                .addGroup(painelCamposProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelTipoProduto)
+                    .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
                 .addGroup(painelCamposProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelCamposProdutoLayout.createSequentialGroup()
@@ -315,7 +310,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         textRevendaProduto.setText("");
         textAreaObsProduto.setText("");
         textQtde.setText("");
-        textTipo.setText("");
+        //textTipo.setText("");
     }//GEN-LAST:event_buttonLimparProdutoMouseClicked
 
     private void buttonCadastrarProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarProdutoMouseClicked
@@ -328,7 +323,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             p.setPrecoCusto(Double.parseDouble(textCustoProduto.getText()));
             p.setPrecoRevenda(Double.parseDouble(textRevendaProduto.getText()));
             p.setQtde(Integer.parseInt(textQtde.getText()));
-            p.setListaTipo(textTipo.getText());
+            p.setListaTipo(comboBoxTipo.getSelectedItem().toString());
             p.setObs(textAreaObsProduto.getText());
             
             
@@ -361,10 +356,6 @@ public class CadastroProduto extends javax.swing.JFrame {
         new BancoProdutos().setVisible(true);
     }//GEN-LAST:event_buttonBancoMouseClicked
 
-    private void textTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textTipoActionPerformed
-
     private void buttonrRelatorioCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonrRelatorioCMouseClicked
         Relatorio.mostraRelatorioProdutos();
     }//GEN-LAST:event_buttonrRelatorioCMouseClicked
@@ -373,6 +364,24 @@ public class CadastroProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonrRelatorioCActionPerformed
 
+    public void popularComboBox(){
+        tipos = new ArrayList<>();
+        
+        tipos.add("Pincel/Kit");
+        tipos.add("Paleta");
+        tipos.add("Batom");
+        tipos.add("Sombra");
+        tipos.add("Blush");
+        tipos.add("Iluminador");
+        tipos.add("Rímel");
+        tipos.add("Lápis de Olho");
+        tipos.add("Delineador");
+        tipos.add("Outros");
+        
+        tipos.forEach((tipo) -> {
+            comboBoxTipo.addItem(tipo);
+        });
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -382,6 +391,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JButton buttonLimparProduto;
     private javax.swing.JButton buttonVoltarProduto;
     private javax.swing.JButton buttonrRelatorioC;
+    private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCustoProduto;
     private javax.swing.JLabel labelIDProduto;
@@ -400,6 +410,5 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JTextField textNomeProduto;
     private javax.swing.JTextField textQtde;
     private javax.swing.JTextField textRevendaProduto;
-    private javax.swing.JTextField textTipo;
     // End of variables declaration//GEN-END:variables
 }

@@ -68,7 +68,6 @@ public class BancoProdutos extends javax.swing.JFrame{
         tfObs = new javax.swing.JTextArea();
         labelAtt = new javax.swing.JLabel();
         buttonAlterar = new javax.swing.JButton();
-        tfTipo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -76,6 +75,7 @@ public class BancoProdutos extends javax.swing.JFrame{
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        comboBoxTipo = new javax.swing.JComboBox<>();
 
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,14 +195,6 @@ public class BancoProdutos extends javax.swing.JFrame{
             }
         });
 
-        tfQtde.setUI(new mako.controller.Watermark("Tipo de Produto", true));
-        tfTipo.setEnabled(false);
-        tfTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTipoActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("ID:");
 
         jLabel4.setText("Nome:");
@@ -268,11 +260,11 @@ public class BancoProdutos extends javax.swing.JFrame{
                                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(painelCamposProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                                            .addComponent(tfQtde, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(tfQtde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                                             .addComponent(tfRevenda, javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(tfNome)
-                                            .addComponent(tfCusto)))
+                                            .addComponent(tfCusto)
+                                            .addComponent(comboBoxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(painelCamposProdutosLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -322,8 +314,8 @@ public class BancoProdutos extends javax.swing.JFrame{
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelCamposProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -441,7 +433,7 @@ public class BancoProdutos extends javax.swing.JFrame{
         String custo = tfCusto.getText();
         String revenda = tfRevenda.getText();
         String qtde = tfQtde.getText();
-        String tipo = tfTipo.getText();
+        String tipo = comboBoxTipo.getSelectedItem().toString();
         
         String obs = tfObs.getText();
         
@@ -456,7 +448,7 @@ public class BancoProdutos extends javax.swing.JFrame{
             tfNome.setText("");
             tfCusto.setText("");
             tfRevenda.setText("");
-            tfTipo.setText("");
+            comboBoxTipo.setSelectedIndex(-1);
             tfQtde.setText("");
             tfObs.setText("");
         
@@ -464,7 +456,7 @@ public class BancoProdutos extends javax.swing.JFrame{
             tfNome.setEnabled(false);
             tfCusto.setEnabled(false);
             tfRevenda.setEnabled(false);
-            tfTipo.setEnabled(false);
+            comboBoxTipo.setEnabled(false);
             tfQtde.setEnabled(false);
             tfObs.setEnabled(false);
             buttonCancelar.setEnabled(false);
@@ -488,14 +480,14 @@ public class BancoProdutos extends javax.swing.JFrame{
         tfCusto.setText("");
         tfRevenda.setText("");
         tfQtde.setText("");
-        tfTipo.setText("");
+        comboBoxTipo.setSelectedIndex(-1);
         tfObs.setText("");
         
         tfID.setEnabled(false);
         tfNome.setEnabled(false);
         tfCusto.setEnabled(false);
         tfRevenda.setEnabled(false);
-        tfTipo.setEnabled(false);
+        comboBoxTipo.setEnabled(false);
         tfQtde.setEnabled(false);
         tfObs.setEnabled(false);
         buttonCancelar.setEnabled(false);
@@ -519,10 +511,6 @@ public class BancoProdutos extends javax.swing.JFrame{
             Logger.getLogger(BancoProdutos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonAlterarMouseClicked
-
-    private void tfTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTipoActionPerformed
     
     public void preencheCampos(String id) throws SQLException{
         ResultSet rs = AcessaBD.executaQuery("select * from mako.produto where produto_id = " +id);
@@ -536,7 +524,9 @@ public class BancoProdutos extends javax.swing.JFrame{
         tfCusto.setEnabled(true);
         tfRevenda.setEnabled(true);
         tfQtde.setEnabled(true);
-        tfTipo.setEnabled(true);
+        comboBoxTipo.setEnabled(true);
+        
+        popularComboBox();
         
         tfObs.setEnabled(true);
   
@@ -552,7 +542,16 @@ public class BancoProdutos extends javax.swing.JFrame{
         tfCusto.setText(reg.get(2));
         tfRevenda.setText(reg.get(3));
         tfQtde.setText(reg.get(4));
-        tfTipo.setText(reg.get(5));
+        
+        String tipoAnterior = reg.get(5);
+        
+        for(int i = 0 ; i < CadastroProduto.tipos.size() ; i++){
+            if(tipoAnterior.equals(comboBoxTipo.getItemAt(i))){
+                comboBoxTipo.setSelectedIndex(i);
+                break;
+            }
+        }
+
         tfObs.setText(reg.get(6));
         
           
@@ -635,7 +634,11 @@ public class BancoProdutos extends javax.swing.JFrame{
         
     }
     
-    
+    public void popularComboBox(){
+        for(String tipo : CadastroProduto.tipos){
+            comboBoxTipo.addItem(tipo);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAlterar;
@@ -648,6 +651,7 @@ public class BancoProdutos extends javax.swing.JFrame{
     private javax.swing.JButton buttonNome;
     private javax.swing.JButton buttonSair;
     private javax.swing.JButton buttonTodos;
+    private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -673,6 +677,5 @@ public class BancoProdutos extends javax.swing.JFrame{
     private javax.swing.JTextArea tfObs;
     private javax.swing.JTextField tfQtde;
     private javax.swing.JTextField tfRevenda;
-    private javax.swing.JTextField tfTipo;
     // End of variables declaration//GEN-END:variables
 }
