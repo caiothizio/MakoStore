@@ -545,7 +545,7 @@ public class BancoProdutos extends javax.swing.JFrame{
         
         String tipoAnterior = reg.get(5);
         
-        for(int i = 0 ; i < CadastroProduto.tipos.size() ; i++){
+        for(int i = 0 ; i < Principal.tipos.size() ; i++){
             if(tipoAnterior.equals(comboBoxTipo.getItemAt(i))){
                 comboBoxTipo.setSelectedIndex(i);
                 break;
@@ -635,7 +635,7 @@ public class BancoProdutos extends javax.swing.JFrame{
     }
     
     public void popularComboBox(){
-        for(String tipo : CadastroProduto.tipos){
+        for(String tipo : Principal.tipos){
             comboBoxTipo.addItem(tipo);
         }
     }

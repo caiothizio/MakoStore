@@ -6,7 +6,7 @@
 package mako.controller;
 
 
-import mako.view.TelaPrincipal;
+import mako.view.Principal;
 
 
 /**
@@ -19,7 +19,7 @@ public class Teste {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TelaPrincipal tela = new TelaPrincipal();
+        Principal tela = new Principal();
         
         tela.setVisible(true);
     }
