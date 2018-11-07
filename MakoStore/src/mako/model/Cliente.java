@@ -5,8 +5,6 @@
  */
 package mako.model;
 
-import mako.controller.ClienteDAO;
-
 /**
  *
  * @author CaioThizio
@@ -20,8 +18,6 @@ public class Cliente implements java.io.Serializable {
     private String cpfcnpj;
     private String obs;
     
-    //private ClienteDAO clienteDao;
-    
     public Cliente(){
         id = 0;
         nome = "";
@@ -29,7 +25,6 @@ public class Cliente implements java.io.Serializable {
         contato = "";
         cpfcnpj = "";
         obs = "";
-        //clienteDao = new ClienteDAO();
     }
     
     /**
@@ -115,13 +110,4 @@ public class Cliente implements java.io.Serializable {
     public void setObs(String obs) {
         this.obs = obs;
     }
-
-    /**
-     * @return the clienteDao
-     */
-    /*
-    public ClienteDAO getClienteDao() {
-        return clienteDao;
-    }
-    */
 }

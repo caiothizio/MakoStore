@@ -55,11 +55,9 @@ from mako.cliente]]>
 		<field name="cliente_cpfcnpj" class="java.lang.String"/>
 		<field name="cliente_obs" class="java.lang.String"/>
 	</subDataset>
-	<parameter name="id" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select *
-from mako.cliente
-where cliente_id = $P{id}]]>
+from mako.cliente]]>
 	</queryString>
 	<field name="cliente_id" class="java.lang.Integer"/>
 	<field name="cliente_nome" class="java.lang.String"/>
@@ -77,15 +75,8 @@ where cliente_id = $P{id}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Relatório de Clientes com o ID: ]]></text>
+				<text><![CDATA[Relatório de Clientes: ]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="465" y="0" width="90" height="79" uuid="bbabfbff-eeaf-4904-bfe7-b600fc33a274"/>
-				<textElement verticalAlignment="Middle">
-					<font size="24"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>

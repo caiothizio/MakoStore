@@ -14,8 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import mako.controller.AcessaBD;
-import mako.controller.FornecedorBD;
+import mako.controller.FornecedorDAO;
 import mako.model.Fornecedor;
 
 /**
@@ -449,7 +448,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
 
     private void buttonTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTodosMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor order by fornecedor_id"));
+            mostraDados(FornecedorDAO.getAllFornecedores());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
         }
@@ -457,7 +456,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
 
     private void buttonIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonIDMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_id = " + textID.getText()));
+            mostraDados(FornecedorDAO.getFornecedorById(textID.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
         }
@@ -465,7 +464,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
 
     private void buttonNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNomeMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_nome = '" + textNome.getText() + "'"));
+            mostraDados(FornecedorDAO.getFornecedorByName(textNome.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
         }
@@ -490,15 +489,13 @@ public class BancoFornecedores extends javax.swing.JFrame {
             return;
         }
 
-        boolean resp = AcessaBD.executaDelete(id, "fornecedor");
-
-        if (!resp) {
+        if (!FornecedorDAO.deleteFornecedor(id)) {
             JOptionPane.showMessageDialog(null, "Erro de deleção.", "Erro de deleção", 0);
         } else {
             JOptionPane.showMessageDialog(null, "Registro deletado com sucesso.", "Deletar registro", -1);
 
             try {
-                mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor"));
+                mostraDados(FornecedorDAO.getAllFornecedores());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
             }
@@ -550,7 +547,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
         }
         String obs = tfObs.getText();
 
-        boolean resp = FornecedorBD.executaUpdateFornecedor(id, nome, endereco, contato, pagina, tipo, tipopes, obs, oldId);
+        boolean resp = FornecedorDAO.updateFornecedor(id, nome, endereco, contato, pagina, tipo, tipopes, obs, oldId);
 
         if (!resp) {
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);
@@ -583,7 +580,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
             buttonGrouptipoPes.clearSelection();
 
             try {
-                mostraDados(AcessaBD.executaQuery("select * from mako.fornecedor"));
+                mostraDados(FornecedorDAO.getAllFornecedores());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " + ex, "Erro ao mostrar tabela", 0);
             }
@@ -652,7 +649,7 @@ public class BancoFornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSairActionPerformed
 
     public void preencheCampos(String id) throws SQLException {
-        ResultSet rs = AcessaBD.executaQuery("select * from mako.fornecedor where fornecedor_id = " + id);
+        ResultSet rs = FornecedorDAO.getFornecedorById(id);
         ResultSetMetaData rsmd = rs.getMetaData();
         ArrayList<String> reg = new ArrayList<>();
 

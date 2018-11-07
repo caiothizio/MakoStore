@@ -5,182 +5,75 @@
  */
 package mako.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import mako.model.ConnectionFactory;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import mako.model.Cliente;
 
 /**
  *
- * @author CaioThizio
+ * @author caiot
  */
-public class ClienteDAO implements java.io.Serializable{
-    private final static ArrayList <Cliente> listaClientes = new ArrayList<>();
-    
-    //private BinarioIO binIO;
-    
-    //private AcessaBD AcessaBD;
-    /*
-    public ClienteDAO(){
-        //this.binIO = new BinarioIO();
+public class ClienteDAO {
+    public static final ResultSet getAllClientes(){
+        try{
+            ConnectionFactory.acessaBD();
+            
+            int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
+            int concorrencia = ResultSet.CONCUR_READ_ONLY;
+            
+            ConnectionFactory.setStdados(ConnectionFactory.getConnection().createStatement(tipo, concorrencia));
+            ConnectionFactory.setRsdados(ConnectionFactory.getStdados().executeQuery("select * from mako.cliente order by cliente_id"));
+            ConnectionFactory.getConnection().close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao executar consulta: " +e, "Erro de consulta SQL", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
         
-        //this.AcessaBD = new AcessaBD();
+        return ConnectionFactory.getRsdados();
     }
     
-    public static final BinarioIO BinarioIO{
-        return binIO;
-    }
-    
-    public static final AcessaBD getBanco(){
-        return AcessaBD;
-    }
-    
-    public static ArrayList<Cliente> listaClientes{
-        return listaClientes;
-    }
-    */
-    public static final Cliente buscaPorNome(String nome){
-        for(Cliente c : listaClientes){
-            if(c.getNome().equals(nome)){
-                return c;
-            }
-        }
-        return null;
-    }
-    
-    public static final Cliente buscaPorId(int id){
-        for(Cliente c : listaClientes){
-            if(c.getId() == id){
-                return c;
-            }
-        }
-        return null;
-    }
-    
-    public static final int buscaIndex(String nome){
-        for(Cliente c : listaClientes){
-            if(c.getNome().equals(nome)){
-                return listaClientes.indexOf(c);
-            }
-        }
-        return -1;
-    }
-    
-    public static final String cadastrar(Cliente c){
+    public static final ResultSet getClienteById(String id){
         try{
-            listaClientes.add(c);
-        }catch(Exception e){
-            return "Erro no cadastro!\n" + e.getMessage();
-        }
-        return "Cadastro realizado com sucesso!";
-    }
-    
-    public static final String deletar(Cliente c){
-        try{
-            listaClientes.remove(c);
-        }catch(Exception e){
-            return "Erro na remoção!\n" + e.getMessage();
-        }
-        return "Remoção realizada com sucesso!";
-    }
-    
-    public static final String atualizar(int ind, Cliente c){
-        try{
-            listaClientes.add(ind, c);
-        }catch(Exception e){
-            return "Erro na atualização!\n" + e.getMessage();
-        }
-        return "Atualização realizada com sucesso!";
-    }
-/*
-    public static final void leClientes() throws IOException {
-        File logTxt = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\cliente\\", "log_cliente.txt");
-        FileReader leitor = new FileReader(logTxt);
-        try (BufferedReader buffer = new BufferedReader(leitor)) {
-            String linha = "-";
+            ConnectionFactory.acessaBD();
             
-            while(buffer.ready()){
-                if("-".equals(linha)){
-                    Cliente c = new Cliente();
-                    
-                    c.setId(Integer.parseInt(buffer.readLine()));
-                    c.setNome(buffer.readLine());
-                    c.setEndereco(buffer.readLine());
-                    c.setContato(buffer.readLine());
-                    c.setCpfcnpj(buffer.readLine());
-                    c.setObs(buffer.readLine());
-                    listaClientes.add(c);
-                    linha = buffer.readLine();
-                }
-            }
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Erro de leitura: "+e, "Erro de leitura", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public static final void escreveClientes() throws IOException {
-        File logTxt = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\cliente\\", "log_cliente.txt");
-       
-        FileWriter escritor = new FileWriter(logTxt, false);
-        try (BufferedWriter buffer = new BufferedWriter(escritor)) {
-            for(Cliente c : listaClientes){
-                buffer.write(Integer.toString(c.getId()) + "\n" + c.getNome() + "\n" + c.getEndereco() + "\n" + c.getContato() + "\n" + c.getCpfcnpj() + "\n" + c.getObs() + "\n-\n");
-            }
+            int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
+            int concorrencia = ResultSet.CONCUR_READ_ONLY;
             
-            buffer.flush();
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Erro de escrita: "+e, "Erro de escrita", JOptionPane.ERROR_MESSAGE);
+            ConnectionFactory.setStdados(ConnectionFactory.getConnection().createStatement(tipo, concorrencia));
+            ConnectionFactory.setRsdados(ConnectionFactory.getStdados().executeQuery("select * from mako.cliente where cliente_id = "+id));
+            ConnectionFactory.getConnection().close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao executar consulta: " +e, "Erro de consulta SQL", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
+        
+        return ConnectionFactory.getRsdados();
     }
     
-    public static final void escreveClientesBin() throws IOException{
-        File logBin = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\cliente\\", "log_cliente.mako");
-        ObjectOutputStream escritor = BinarioIO.criarEscritor(logBin, true);
-        for(Cliente c : listaClientes){
-            BinarioIO.escrever(escritor, c, true);
-        }
-    }
-    
-    public static final void imprimeArray(ArrayList<Cliente> array){
-        for(Cliente c : array){
-            System.out.println(Integer.toString(c.getId()) + "\n" + c.getNome() + "\n" + c.getEndereco() + "\n" + c.getContato() + "\n" + c.getCpfcnpj() + "\n" + c.getObs() + "\n-\n");
-        }
-    }
-    
-    public static final void apagarFiles(){
+    public static final ResultSet getClienteByName(String nome){
         try{
-            File logTxt = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\cliente\\", "log_cliente.txt");
-            File logBin = new File("C:\\Users\\caiot\\OneDrive\\Documentos\\Caio\\ProgDesk\\src\\src\\mako\\archive\\cliente\\", "log_cliente.mako");
-            FileWriter escritor = new FileWriter(logTxt, false);
-            ObjectOutputStream escritorBin = BinarioIO.criarEscritor(logBin, false);
-            BufferedWriter buffer = new BufferedWriter(escritor);
+            ConnectionFactory.acessaBD();
             
-            buffer.write("");
-            BinarioIO.escrever(escritorBin, "", true);
+            int tipo = ResultSet.TYPE_SCROLL_SENSITIVE;
+            int concorrencia = ResultSet.CONCUR_READ_ONLY;
             
-        }catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Erro ao apagar arquivos: "+e, "Erro de remoção", JOptionPane.ERROR_MESSAGE);
+            ConnectionFactory.setStdados(ConnectionFactory.getConnection().createStatement(tipo, concorrencia));
+            ConnectionFactory.setRsdados(ConnectionFactory.getStdados().executeQuery("select * from mako.cliente where cliente_nome = '"+nome+"'"));
+            ConnectionFactory.getConnection().close();
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao executar consulta: " +e, "Erro de consulta SQL", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
-    }
-    */
-    
-    public static final boolean conectaBD(){
-        return ConnectionFactory.acessaBD();
+        
+        return ConnectionFactory.getRsdados();
     }
     
-    public static final boolean adicionarClienteBD(Cliente c){
+    public static final boolean newCliente(Cliente c){
         try{
-            conectaBD();
+            ConnectionFactory.acessaBD();
             String querydados = "insert into mako.cliente" + "(cliente_id, cliente_nome, cliente_endereco, cliente_contato, cliente_cpfcnpj, cliente_obs)" + "values (?, ?, ?, ?, ?, ?);";
             
             PreparedStatement st = ConnectionFactory.getConnection().prepareStatement(querydados);
@@ -204,5 +97,59 @@ public class ClienteDAO implements java.io.Serializable{
             JOptionPane.showMessageDialog(null, "Erro de SQL:" +erro, "Erro de SQL", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+    }
+    
+    public static final boolean deleteCliente(String id){
+        try{
+            ConnectionFactory.acessaBD();
+            
+            String query = "delete from mako.cliente where cliente_id = ?";
+            
+            PreparedStatement stmt = ConnectionFactory.getConnection().prepareStatement(query);
+        
+            stmt.setInt(1, Integer.parseInt(id));
+            
+            int i = stmt.executeUpdate();
+
+            ConnectionFactory.getConnection().commit();
+            ConnectionFactory.getConnection().close();
+            
+            return true;
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao executar delete: " +e, "Erro de consulta SQL", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+       
+    }
+    
+    public static final boolean updateCliente(String id, String nome, String endereco, String contato, String cpfcnpj, String obs, String oldId){
+        try{
+            ConnectionFactory.acessaBD();
+            
+            String query = "update mako.cliente set cliente_id = ?, cliente_nome = ?, cliente_endereco = ?, cliente_contato = ?, cliente_cpfcnpj = ?, cliente_obs = ? where cliente_id = ?";
+            
+            PreparedStatement stmt = ConnectionFactory.getConnection().prepareStatement(query);
+            
+            stmt.setInt(1, Integer.parseInt(id));
+            stmt.setString(2, nome);
+            stmt.setString(3, endereco);
+            stmt.setString(4, contato);
+            stmt.setString(5, cpfcnpj);
+            stmt.setString(6, obs);
+            stmt.setInt(7, Integer.parseInt(oldId));
+            
+            int i = stmt.executeUpdate();
+
+            ConnectionFactory.getConnection().commit();
+            ConnectionFactory.getConnection().close();
+            
+            return true;
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao executar update: " +e, "Erro de consulta SQL", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+       
     }
 }

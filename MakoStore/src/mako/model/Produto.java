@@ -5,9 +5,6 @@
  */
 package mako.model;
 
-import java.util.ArrayList;
-import mako.controller.ProdutoDAO;
-
 /**
  *
  * @author CaioThizio

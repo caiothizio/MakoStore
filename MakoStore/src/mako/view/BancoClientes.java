@@ -14,8 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import mako.controller.AcessaBD;
-import mako.controller.ClienteBD;
+import mako.controller.ClienteDAO;
 import mako.model.Cliente;
 
 /**
@@ -354,7 +353,7 @@ public class BancoClientes extends javax.swing.JFrame{
 
     private void buttonTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTodosMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.cliente order by cliente_id"));
+            mostraDados(ClienteDAO.getAllClientes());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -362,7 +361,7 @@ public class BancoClientes extends javax.swing.JFrame{
 
     private void buttonIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonIDMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.cliente where cliente_id = " + textID.getText()));
+            mostraDados(ClienteDAO.getClienteById(textID.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -370,7 +369,7 @@ public class BancoClientes extends javax.swing.JFrame{
 
     private void buttonNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNomeMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.cliente where cliente_nome = '" + textNome.getText() + "'"));
+            mostraDados(ClienteDAO.getClienteByName(textNome.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -394,15 +393,13 @@ public class BancoClientes extends javax.swing.JFrame{
         if(JOptionPane.showConfirmDialog(null, "Tem certeza que gostaria de apagar o cliente de id "+id+"?", "Apagar Cliente", JOptionPane.YES_NO_OPTION) != 0)
             return;
         
-        boolean resp = AcessaBD.executaDelete(id, "cliente");
-        
-        if(!resp){
+        if(!ClienteDAO.deleteCliente(id)){
             JOptionPane.showMessageDialog(null, "Erro de deleção.", "Erro de deleção", 0);
         }else{
             JOptionPane.showMessageDialog(null, "Registro deletado com sucesso.", "Deletar registro", -1);
             
             try {
-                mostraDados(AcessaBD.executaQuery("select * from mako.cliente"));
+                mostraDados(ClienteDAO.getAllClientes());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
             }
@@ -428,7 +425,7 @@ public class BancoClientes extends javax.swing.JFrame{
         String cpfcnpj = tfCpfCnpj.getText();
         String obs = tfObs.getText();
         
-        boolean resp = ClienteBD.executaUpdateCliente(id, nome, endereco, contato, cpfcnpj, obs, oldId);
+        boolean resp = ClienteDAO.updateCliente(id, nome, endereco, contato, cpfcnpj, obs, oldId);
         
         if(!resp){
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);
@@ -452,7 +449,7 @@ public class BancoClientes extends javax.swing.JFrame{
             buttonAtt.setEnabled(false);
             
             try {
-                mostraDados(AcessaBD.executaQuery("select * from mako.cliente"));
+                mostraDados(ClienteDAO.getAllClientes());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
             }
@@ -500,7 +497,7 @@ public class BancoClientes extends javax.swing.JFrame{
     }//GEN-LAST:event_buttonAlterarMouseClicked
     
     public void preencheCampos(String id) throws SQLException{
-        ResultSet rs = AcessaBD.executaQuery("select * from mako.cliente where cliente_id = " +id);
+        ResultSet rs = ClienteDAO.getClienteById(id);
         ResultSetMetaData rsmd = rs.getMetaData();
         ArrayList<String> reg = new ArrayList<>();
         

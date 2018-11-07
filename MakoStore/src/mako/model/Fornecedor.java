@@ -5,8 +5,6 @@
  */
 package mako.model;
 
-import mako.controller.FornecedorDAO;
-
 /**
  *
  * @author CaioThizio

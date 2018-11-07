@@ -14,8 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import mako.controller.AcessaBD;
-import mako.controller.ProdutoBD;
+import mako.controller.ProdutoDAO;
 import mako.model.Produto;
 
 /**
@@ -361,7 +360,7 @@ public class BancoProdutos extends javax.swing.JFrame{
 
     private void buttonTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTodosMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.produto order by produto_id asc"));
+            mostraDados(ProdutoDAO.getAllProdutos());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -369,7 +368,7 @@ public class BancoProdutos extends javax.swing.JFrame{
 
     private void buttonIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonIDMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.produto where produto_id = " + textID.getText()));
+            mostraDados(ProdutoDAO.getProdutoById(textID.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -377,7 +376,7 @@ public class BancoProdutos extends javax.swing.JFrame{
 
     private void buttonNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNomeMouseClicked
         try {
-            mostraDados(AcessaBD.executaQuery("select * from mako.produto where produto_nome = '" + textNome.getText() + "'"));
+            mostraDados(ProdutoDAO.getProdutoByName(textNome.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -401,15 +400,13 @@ public class BancoProdutos extends javax.swing.JFrame{
         if(JOptionPane.showConfirmDialog(null, "Tem certeza que gostaria de apagar o produto de id "+id+"?", "Apagar Produto", JOptionPane.YES_NO_OPTION) != 0)
             return;
         
-        boolean resp = AcessaBD.executaDelete(id, "produto");
-        
-        if(!resp){
+        if(!ProdutoDAO.deleteProduto(id)){
             JOptionPane.showMessageDialog(null, "Erro de deleção.", "Erro de deleção", 0);
         }else{
             JOptionPane.showMessageDialog(null, "Registro deletado com sucesso.", "Deletar registro", -1);
             
             try {
-                mostraDados(AcessaBD.executaQuery("select * from mako.produto"));
+                mostraDados(ProdutoDAO.getAllProdutos());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
             }
@@ -437,7 +434,7 @@ public class BancoProdutos extends javax.swing.JFrame{
         
         String obs = tfObs.getText();
         
-        boolean resp = ProdutoBD.executaUpdateProduto(id, nome, custo, revenda, qtde, tipo, obs, oldId);
+        boolean resp = ProdutoDAO.updateProduto(id, nome, custo, revenda, qtde, tipo, obs, oldId);
         
         if(!resp){
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);
@@ -463,7 +460,7 @@ public class BancoProdutos extends javax.swing.JFrame{
             buttonAtt.setEnabled(false);
             
             try {
-                mostraDados(AcessaBD.executaQuery("select * from mako.produto"));
+                mostraDados(ProdutoDAO.getAllProdutos());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
             }
@@ -513,7 +510,7 @@ public class BancoProdutos extends javax.swing.JFrame{
     }//GEN-LAST:event_buttonAlterarMouseClicked
     
     public void preencheCampos(String id) throws SQLException{
-        ResultSet rs = AcessaBD.executaQuery("select * from mako.produto where produto_id = " +id);
+        ResultSet rs = ProdutoDAO.getProdutoById(id);
         ResultSetMetaData rsmd = rs.getMetaData();
         ArrayList<String> reg = new ArrayList<>();
         

@@ -5,6 +5,7 @@
  */
 package mako.controller;
 
+import mako.model.ConnectionFactory;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,17 +32,7 @@ public class Relatorio {
     public static final void mostraRelatorioClientes() {
         Map params = new HashMap();
         String s = null;
-
-        while (true) {
-            s = JOptionPane.showInputDialog("Digite o ID do cliente");
-            if (!isNumeric(s)) {
-                JOptionPane.showMessageDialog(null, "Erro! ID inválido.");
-            } else {
-                break;
-            }
-        }
-        params.put("id", Integer.parseInt(s));
-
+        
         JasperPrint impressao;
         try {
             if (ConnectionFactory.getConnection() == null) {
