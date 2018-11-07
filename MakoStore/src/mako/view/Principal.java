@@ -13,9 +13,11 @@ import mako.controller.ClienteDAO;
 import mako.controller.FornecedorDAO;
 import mako.controller.ProdutoDAO;
 import mako.controller.Relatorio;
+import mako.controller.VendaDAO;
 import mako.model.Cliente;
 import mako.model.Fornecedor;
 import mako.model.Produto;
+import mako.model.Venda;
 
 /**
  *
@@ -24,6 +26,7 @@ import mako.model.Produto;
 public class Principal extends javax.swing.JFrame {
     
     public static ArrayList<String> tipos;
+    public double preco = -1;
 
     /**
      * Creates new form CardLayout
@@ -139,11 +142,11 @@ public class Principal extends javax.swing.JFrame {
         labelClienteVenda = new javax.swing.JLabel();
         comboBoxClienteVenda = new javax.swing.JComboBox<>();
         labelClienteVenda2 = new javax.swing.JLabel();
-        comboBoxClienteVenda2 = new javax.swing.JComboBox<>();
+        comboBoxProdutoVenda = new javax.swing.JComboBox<>();
         labelClienteVenda3 = new javax.swing.JLabel();
-        textIDVenda1 = new javax.swing.JTextField();
+        textQtdProdutos = new javax.swing.JTextField();
         labelClienteVenda4 = new javax.swing.JLabel();
-        textIDVenda2 = new javax.swing.JTextField();
+        textPrecoTotal = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -251,27 +254,27 @@ public class Principal extends javax.swing.JFrame {
         labelNomeCliente.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelNomeCliente.setText("Nome do Cliente:");
 
-        textNomeCliente.setUI(new mako.controller.Watermark("Digite o nome do Cliente...", true));
+        textNomeCliente.setUI(new mako.utils.Watermark("Digite o nome do Cliente...", true));
 
         labelEndCliente.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelEndCliente.setText("Endereço do Cliente:");
 
-        textEndCliente.setUI(new mako.controller.Watermark("Digite o endereço do Cliente (rua, número, cep, cidade, estado)...", true));
+        textEndCliente.setUI(new mako.utils.Watermark("Digite o endereço do Cliente (rua, número, cep, cidade, estado)...", true));
 
         labelIdCliente.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelIdCliente.setText("ID do Cliente:");
 
-        textIdCliente.setUI(new mako.controller.Watermark("Digite o ID do Cliente...", true));
+        textIdCliente.setUI(new mako.utils.Watermark("Digite o ID do Cliente...", true));
 
         labelContatoCliente.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelContatoCliente.setText("Contato do Cliente:");
 
-        textContatoCliente.setUI(new mako.controller.Watermark("Digite um número para contato com o Cliente. ex:(00)0000-0000", true));
+        textContatoCliente.setUI(new mako.utils.Watermark("Digite um número para contato com o Cliente. ex:(00)0000-0000", true));
 
         labelCpfCnpjCliente.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelCpfCnpjCliente.setText("CPF/CNPJ:");
 
-        textCpfCnpj.setUI(new mako.controller.Watermark("Digite o CPF ou CNPJ do Cliente...", true));
+        textCpfCnpj.setUI(new mako.utils.Watermark("Digite o CPF ou CNPJ do Cliente...", true));
 
         labelObservacoesCliente.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelObservacoesCliente.setText("Observações:");
@@ -433,27 +436,27 @@ public class Principal extends javax.swing.JFrame {
         labelNomeFornecedor.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelNomeFornecedor.setText("Nome do Fornecedor:");
 
-        textNomeFornecedor.setUI(new mako.controller.Watermark("Digite o nome do Fornecedor...", true));
+        textNomeFornecedor.setUI(new mako.utils.Watermark("Digite o nome do Fornecedor...", true));
 
         labelEndFornecedor.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelEndFornecedor.setText("Endereço do Fornecedor:");
 
-        textEndFornecedor.setUI(new mako.controller.Watermark("Digite o endereço do Fornecedor...", true));
+        textEndFornecedor.setUI(new mako.utils.Watermark("Digite o endereço do Fornecedor...", true));
 
         labelIdFornecedor.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelIdFornecedor.setText("ID do Fornecedor:");
 
-        textIdFornecedor.setUI(new mako.controller.Watermark("Digite o ID do Fornecedor...", true));
+        textIdFornecedor.setUI(new mako.utils.Watermark("Digite o ID do Fornecedor...", true));
 
         labelContatoFornecedor.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelContatoFornecedor.setText("Contato do Fornecedor:");
 
-        textContatoFornecedor.setUI(new mako.controller.Watermark("Digite um número para contato com o Fornecedor. ex:(00)0000-0000", true));
+        textContatoFornecedor.setUI(new mako.utils.Watermark("Digite um número para contato com o Fornecedor. ex:(00)0000-0000", true));
 
         labelPagFornecedor.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelPagFornecedor.setText("Página Fornecedor:");
 
-        textPagFornecedor.setUI(new mako.controller.Watermark("Digite a página web do Fornecedor (caso exista).", true));
+        textPagFornecedor.setUI(new mako.utils.Watermark("Digite a página web do Fornecedor (caso exista).", true));
 
         labelObservacoesFornecedor.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelObservacoesFornecedor.setText("Observações:");
@@ -674,12 +677,12 @@ public class Principal extends javax.swing.JFrame {
         labelNomeProduto.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelNomeProduto.setText("Nome do Produto:");
 
-        textNomeProduto.setUI(new mako.controller.Watermark("Digite o nome do Produto...", true));
+        textNomeProduto.setUI(new mako.utils.Watermark("Digite o nome do Produto...", true));
 
         labelNomeFornProduto.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelNomeFornProduto.setText("Nome do Fornecedor:");
 
-        textFornProduto.setUI(new mako.controller.Watermark("Digite o nome do Fornecedor deste Produto...", true));
+        textFornProduto.setUI(new mako.utils.Watermark("Digite o nome do Fornecedor deste Produto...", true));
 
         labelQtdProduto.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelQtdProduto.setText("Quantidade:");
@@ -687,7 +690,7 @@ public class Principal extends javax.swing.JFrame {
         labelIDProduto.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelIDProduto.setText("ID do Produto:");
 
-        textIDProduto.setUI(new mako.controller.Watermark("Digite o ID do Produto...", true));
+        textIDProduto.setUI(new mako.utils.Watermark("Digite o ID do Produto...", true));
 
         labelTipoProduto.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelTipoProduto.setText("Tipo do Produto:");
@@ -942,7 +945,7 @@ public class Principal extends javax.swing.JFrame {
         labelIDVenda.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelIDVenda.setText("ID da Venda:");
 
-        textIDProduto.setUI(new mako.controller.Watermark("Digite o ID da Venda...", true));
+        textIDProduto.setUI(new mako.utils.Watermark("Digite o ID da Venda...", true));
         textIDVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textIDVendaActionPerformed(evt);
@@ -955,28 +958,41 @@ public class Principal extends javax.swing.JFrame {
         labelClienteVenda2.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelClienteVenda2.setText("Produto:");
 
+        comboBoxProdutoVenda.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxProdutoVendaItemStateChanged(evt);
+            }
+        });
+
         labelClienteVenda3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelClienteVenda3.setText("Quantidade:");
 
-        textIDProduto.setUI(new mako.controller.Watermark("Digite o ID da Venda...", true));
-        textIDVenda1.addActionListener(new java.awt.event.ActionListener() {
+        textIDProduto.setUI(new mako.utils.Watermark("Digite o ID da Venda...", true));
+        textQtdProdutos.setText("0");
+        textQtdProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIDVenda1ActionPerformed(evt);
+                textQtdProdutosActionPerformed(evt);
             }
         });
 
         labelClienteVenda4.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         labelClienteVenda4.setText("Preço:");
 
-        textIDProduto.setUI(new mako.controller.Watermark("Digite o ID da Venda...", true));
-        textIDVenda2.setEnabled(false);
-        textIDVenda2.addActionListener(new java.awt.event.ActionListener() {
+        textIDProduto.setUI(new mako.utils.Watermark("Digite o ID da Venda...", true));
+        textPrecoTotal.setText("0");
+        textPrecoTotal.setEnabled(false);
+        textPrecoTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textIDVenda2ActionPerformed(evt);
+                textPrecoTotalActionPerformed(evt);
             }
         });
 
         jButton1.setText("Calcular Preço");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelCamposVendaLayout = new javax.swing.GroupLayout(painelCamposVenda);
         painelCamposVenda.setLayout(painelCamposVendaLayout);
@@ -1008,15 +1024,15 @@ public class Principal extends javax.swing.JFrame {
                                 .addGap(99, 99, 99)
                                 .addComponent(buttonCadastrarVenda))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelCamposVendaLayout.createSequentialGroup()
-                                .addComponent(textIDVenda1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textQtdProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1)
                                 .addGap(0, 355, Short.MAX_VALUE))
-                            .addComponent(comboBoxClienteVenda2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxProdutoVenda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(60, 60, 60))
                     .addGroup(painelCamposVendaLayout.createSequentialGroup()
-                        .addComponent(textIDVenda2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         painelCamposVendaLayout.setVerticalGroup(
@@ -1035,16 +1051,16 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(painelCamposVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelClienteVenda2)
-                    .addComponent(comboBoxClienteVenda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxProdutoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addGroup(painelCamposVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelClienteVenda3)
-                    .addComponent(textIDVenda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textQtdProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(painelCamposVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelClienteVenda4)
-                    .addComponent(textIDVenda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71)
                 .addGroup(painelCamposVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1290,36 +1306,81 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonrRelatorioC2ActionPerformed
 
     private void botaoNovaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoNovaCompraMouseClicked
-        // TODO add your handling code here:
+        Container cards = getContentPane();
+
+        CardLayout cl = (CardLayout) cards.getLayout();
+        cl.show(cards, "cardCadVenda");
+        
+        popularComboBoxClientes();
+        popularComboBoxProdutos();
     }//GEN-LAST:event_botaoNovaCompraMouseClicked
 
     private void buttonVoltarVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltarVendaMouseClicked
-        // TODO add your handling code here:
+        Container cards = getContentPane();
+
+        CardLayout cl = (CardLayout) cards.getLayout();
+        cl.show(cards, "cardMenuInicial");
     }//GEN-LAST:event_buttonVoltarVendaMouseClicked
 
     private void buttonLimparVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLimparVendaMouseClicked
-        // TODO add your handling code here:
+        textIDVenda.setText("");
+        textQtdProdutos.setText("0");
+        textPrecoTotal.setText("0");
+        textAreaObsVenda.setText("");
     }//GEN-LAST:event_buttonLimparVendaMouseClicked
 
     private void buttonCadastrarVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCadastrarVendaMouseClicked
-        // TODO add your handling code here:
+        int op = JOptionPane.showConfirmDialog(null, "Tem certeza que gostaria de cadastrar a venda?", "Cadastro de Venda", JOptionPane.YES_NO_OPTION);
+        Venda v = new Venda();
+        
+        if (op == 0){
+
+            v.setId(Integer.parseInt(textIDVenda.getText()));
+            v.setCliente_id(ClienteDAO.getIdByName(comboBoxClienteVenda.getSelectedItem().toString()));
+            v.setProduto_id(ProdutoDAO.getIdByName(comboBoxProdutoVenda.getSelectedItem().toString()));
+            v.setObs(textAreaObsVenda.getText());
+            v.setQtd(Integer.parseInt(textQtdProdutos.getText()));
+            v.setPreco(Double.parseDouble(textPrecoTotal.getText()));
+
+            if(VendaDAO.newVenda(v))
+                JOptionPane.showMessageDialog(null,"Venda cadastrada com sucesso!", "Cadastro de Venda", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_buttonCadastrarVendaMouseClicked
 
     private void buttonBanco2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonBanco2MouseClicked
-        // TODO add your handling code here:
+        new BancoVendas().setVisible(true);
     }//GEN-LAST:event_buttonBanco2MouseClicked
 
     private void textIDVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDVendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textIDVendaActionPerformed
 
-    private void textIDVenda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDVenda1ActionPerformed
+    private void textQtdProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textQtdProdutosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIDVenda1ActionPerformed
+    }//GEN-LAST:event_textQtdProdutosActionPerformed
 
-    private void textIDVenda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIDVenda2ActionPerformed
+    private void textPrecoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPrecoTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textIDVenda2ActionPerformed
+    }//GEN-LAST:event_textPrecoTotalActionPerformed
+
+    private void comboBoxProdutoVendaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxProdutoVendaItemStateChanged
+        /*
+        
+        Mudar preço
+        
+        
+        */
+        
+        String item = comboBoxProdutoVenda.getSelectedItem().toString();
+        preco = ProdutoDAO.getPrecoRevendaByName(item);
+    }//GEN-LAST:event_comboBoxProdutoVendaItemStateChanged
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        int qtd = Integer.parseInt(textQtdProdutos.getText());
+        double total = qtd * preco;
+  
+        textPrecoTotal.setText(Double.toString(total));
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1408,7 +1469,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton buttonrRelatorioC1;
     private javax.swing.JButton buttonrRelatorioC2;
     private javax.swing.JComboBox<String> comboBoxClienteVenda;
-    private javax.swing.JComboBox<String> comboBoxClienteVenda2;
+    private javax.swing.JComboBox<String> comboBoxProdutoVenda;
     private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1466,15 +1527,39 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField textFornProduto;
     private javax.swing.JTextField textIDProduto;
     private javax.swing.JTextField textIDVenda;
-    private javax.swing.JTextField textIDVenda1;
-    private javax.swing.JTextField textIDVenda2;
     private javax.swing.JTextField textIdCliente;
     private javax.swing.JTextField textIdFornecedor;
     private javax.swing.JTextField textNomeCliente;
     private javax.swing.JTextField textNomeFornecedor;
     private javax.swing.JTextField textNomeProduto;
     private javax.swing.JTextField textPagFornecedor;
+    private javax.swing.JTextField textPrecoTotal;
+    private javax.swing.JTextField textQtdProdutos;
     private javax.swing.JTextField textQtde;
     private javax.swing.JTextField textRevendaProduto;
     // End of variables declaration//GEN-END:variables
+
+    private void popularComboBoxClientes() {
+        if(comboBoxClienteVenda.getItemCount() > 0)
+            return;
+        
+        
+        ArrayList<String> clientes = ClienteDAO.getAllClientesArray();
+        
+        clientes.forEach((nome) -> {
+            comboBoxClienteVenda.addItem(nome);
+        });
+    }
+
+    private void popularComboBoxProdutos() {
+        if(comboBoxProdutoVenda.getItemCount() > 0)
+            return;
+        
+        
+        ArrayList<String> clientes = ProdutoDAO.getAllProdutosArray();
+        
+        clientes.forEach((nome) -> {
+            comboBoxProdutoVenda.addItem(nome);
+        });
+    }
 }

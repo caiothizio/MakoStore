@@ -335,7 +335,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfID.setUI(new mako.controller.Watermark(&quot;ID&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfID.setUI(new mako.utils.Watermark(&quot;ID&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="tfNome">
@@ -343,7 +343,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfNome.setUI(new mako.controller.Watermark(&quot;Nome&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfNome.setUI(new mako.utils.Watermark(&quot;Nome&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="tfCusto">
@@ -351,7 +351,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfCusto.setUI(new mako.controller.Watermark(&quot;Pre&#xe7;o de Custo&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfCusto.setUI(new mako.utils.Watermark(&quot;Pre&#xe7;o de Custo&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="tfRevenda">
@@ -359,7 +359,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfRevenda.setUI(new mako.controller.Watermark(&quot;Pre&#xe7;o de Revenda&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfRevenda.setUI(new mako.utils.Watermark(&quot;Pre&#xe7;o de Revenda&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="tfQtde">
@@ -367,7 +367,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfQtde.setUI(new mako.controller.Watermark(&quot;Quantidade&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tfQtde.setUI(new mako.utils.Watermark(&quot;Quantidade&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="buttonCancelar">

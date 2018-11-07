@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import mako.controller.ClienteDAO;
 import mako.controller.ProdutoDAO;
 import mako.model.Produto;
 
@@ -155,19 +156,19 @@ public class BancoProdutos extends javax.swing.JFrame{
             }
         });
 
-        tfID.setUI(new mako.controller.Watermark("ID", true));
+        tfID.setUI(new mako.utils.Watermark("ID", true));
         tfID.setEnabled(false);
 
-        tfNome.setUI(new mako.controller.Watermark("Nome", true));
+        tfNome.setUI(new mako.utils.Watermark("Nome", true));
         tfNome.setEnabled(false);
 
-        tfCusto.setUI(new mako.controller.Watermark("Preço de Custo", true));
+        tfCusto.setUI(new mako.utils.Watermark("Preço de Custo", true));
         tfCusto.setEnabled(false);
 
-        tfRevenda.setUI(new mako.controller.Watermark("Preço de Revenda", true));
+        tfRevenda.setUI(new mako.utils.Watermark("Preço de Revenda", true));
         tfRevenda.setEnabled(false);
 
-        tfQtde.setUI(new mako.controller.Watermark("Quantidade", true));
+        tfQtde.setUI(new mako.utils.Watermark("Quantidade", true));
         tfQtde.setEnabled(false);
 
         buttonCancelar.setText("Cancelar");
@@ -675,4 +676,6 @@ public class BancoProdutos extends javax.swing.JFrame{
     private javax.swing.JTextField tfQtde;
     private javax.swing.JTextField tfRevenda;
     // End of variables declaration//GEN-END:variables
+
+    
 }

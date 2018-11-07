@@ -18,14 +18,7 @@ public class Venda {
     private int qtd;
     private double preco;
 
-    public Venda(int id, int cliente_id, int produto_id, String obs, int qtd, double preco) {
-        this.id = id;
-        this.cliente_id = cliente_id;
-        this.produto_id = produto_id;
-        this.obs = obs;
-        this.qtd = qtd;
-        this.preco = preco;
-    }
+    public Venda() {}
 
     public int getId() {
         return id;

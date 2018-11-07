@@ -15,18 +15,21 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mako.controller.ClienteDAO;
-import mako.model.Cliente;
+import mako.controller.ProdutoDAO;
+import mako.controller.VendaDAO;
+import mako.model.Venda;
 
 /**
  *
  * @author CaioThizio
  */
-public class BancoClientes extends javax.swing.JFrame{
-    private Cliente c = new Cliente();
+
+public class BancoVendas extends javax.swing.JFrame{
+    private Venda v = new Venda();
     /**
      * Creates new form CadastroProduto
      */
-    public BancoClientes() {
+    public BancoVendas() {
         initComponents();
     }
 
@@ -46,11 +49,8 @@ public class BancoClientes extends javax.swing.JFrame{
         labelCliente = new javax.swing.JLabel();
         painelCamposCliente = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         textID = new javax.swing.JTextField();
         buttonID = new javax.swing.JButton();
-        textNome = new javax.swing.JTextField();
-        buttonNome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaClientes = new javax.swing.JTable();
         buttonTodos = new javax.swing.JButton();
@@ -58,10 +58,8 @@ public class BancoClientes extends javax.swing.JFrame{
         buttonApagar = new javax.swing.JButton();
         buttonAtt = new javax.swing.JButton();
         tfID = new javax.swing.JTextField();
-        tfNome = new javax.swing.JTextField();
-        tfEnd = new javax.swing.JTextField();
-        tfCont = new javax.swing.JTextField();
-        tfCpfCnpj = new javax.swing.JTextField();
+        tfQtd = new javax.swing.JTextField();
+        tfPreco = new javax.swing.JTextField();
         buttonCancelar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tfObs = new javax.swing.JTextArea();
@@ -73,6 +71,9 @@ public class BancoClientes extends javax.swing.JFrame{
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        buttonCalcularPreco = new javax.swing.JButton();
+        comboBoxCliente = new javax.swing.JComboBox<>();
+        comboBoxProduto = new javax.swing.JComboBox<>();
 
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,27 +91,17 @@ public class BancoClientes extends javax.swing.JFrame{
 
         labelCliente.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelCliente.setForeground(new java.awt.Color(255, 255, 255));
-        labelCliente.setText("Clientes");
+        labelCliente.setText("Vendas");
 
         painelCamposCliente.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel1.setText("ID:");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        jLabel2.setText("Nome:");
-
         buttonID.setText("Busca ID");
         buttonID.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonIDMouseClicked(evt);
-            }
-        });
-
-        buttonNome.setText("Busca Nome");
-        buttonNome.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonNomeMouseClicked(evt);
             }
         });
 
@@ -157,17 +148,15 @@ public class BancoClientes extends javax.swing.JFrame{
         tfID.setUI(new mako.utils.Watermark("ID", true));
         tfID.setEnabled(false);
 
-        tfNome.setUI(new mako.utils.Watermark("Nome", true));
-        tfNome.setEnabled(false);
+        tfQtd.setUI(new mako.utils.Watermark("Contato", true));
+        tfQtd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfQtdActionPerformed(evt);
+            }
+        });
 
-        tfEnd.setUI(new mako.utils.Watermark("Endereço", true));
-        tfEnd.setEnabled(false);
-
-        tfCont.setUI(new mako.utils.Watermark("Contato", true));
-        tfCont.setEnabled(false);
-
-        tfCpfCnpj.setUI(new mako.utils.Watermark("CPF/CNPJ", true));
-        tfCpfCnpj.setEnabled(false);
+        tfPreco.setUI(new mako.utils.Watermark("CPF/CNPJ", true));
+        tfPreco.setEnabled(false);
 
         buttonCancelar.setText("Cancelar");
         buttonCancelar.setEnabled(false);
@@ -193,17 +182,29 @@ public class BancoClientes extends javax.swing.JFrame{
             }
         });
 
-        jLabel3.setText("Nome:");
+        jLabel3.setText("Cliente:");
 
         jLabel4.setText("ID:");
 
-        jLabel5.setText("Endereço:");
+        jLabel5.setText("Produto:");
 
-        jLabel6.setText("Contato:");
+        jLabel6.setText("Qtd:");
 
-        jLabel7.setText("CPF/CNPJ:");
+        jLabel7.setText("Preco:");
 
         jLabel8.setText("Obs:");
+
+        buttonCalcularPreco.setText("Calcular Preço");
+        buttonCalcularPreco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonCalcularPrecoMouseClicked(evt);
+            }
+        });
+        buttonCalcularPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCalcularPrecoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout painelCamposClienteLayout = new javax.swing.GroupLayout(painelCamposCliente);
         painelCamposCliente.setLayout(painelCamposClienteLayout);
@@ -212,19 +213,13 @@ public class BancoClientes extends javax.swing.JFrame{
             .addGroup(painelCamposClienteLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                     .addGroup(painelCamposClienteLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonID)
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonNome))
+                        .addComponent(buttonID))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposClienteLayout.createSequentialGroup()
                         .addComponent(buttonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -232,32 +227,11 @@ public class BancoClientes extends javax.swing.JFrame{
                         .addGap(91, 91, 91)
                         .addComponent(buttonApagar))
                     .addComponent(buttonTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelCamposClienteLayout.createSequentialGroup()
-                        .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelCamposClienteLayout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(painelCamposClienteLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfCpfCnpj, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfCont, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfEnd, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(painelCamposClienteLayout.createSequentialGroup()
-                                .addComponent(labelAtt)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(painelCamposClienteLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfNome))))
+                        .addGap(83, 83, 83)
+                        .addComponent(labelAtt)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(painelCamposClienteLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +242,29 @@ public class BancoClientes extends javax.swing.JFrame{
                             .addGroup(painelCamposClienteLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane3))))
+                            .addComponent(jScrollPane3)
+                            .addGroup(painelCamposClienteLayout.createSequentialGroup()
+                                .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel3))
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfQtd, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(comboBoxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(painelCamposClienteLayout.createSequentialGroup()
+                                        .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(painelCamposClienteLayout.createSequentialGroup()
+                                                .addComponent(tfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(buttonCalcularPreco)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(comboBoxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap())
         );
         painelCamposClienteLayout.setVerticalGroup(
@@ -279,11 +275,8 @@ public class BancoClientes extends javax.swing.JFrame{
                         .addGap(38, 38, 38)
                         .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonID)
-                            .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonNome)))
+                            .addComponent(buttonID)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCamposClienteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(labelAtt)))
@@ -297,25 +290,29 @@ public class BancoClientes extends javax.swing.JFrame{
                     .addGroup(painelCamposClienteLayout.createSequentialGroup()
                         .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel3)
+                            .addComponent(comboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(comboBoxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonCalcularPreco))
                             .addComponent(jLabel7))
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)))
                 .addGroup(painelCamposClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonApagar)
@@ -330,11 +327,11 @@ public class BancoClientes extends javax.swing.JFrame{
         painelCliente.setLayout(painelClienteLayout);
         painelClienteLayout.setHorizontalGroup(
             painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(painelCamposCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(painelClienteLayout.createSequentialGroup()
-                .addGap(409, 409, 409)
+                .addGap(448, 448, 448)
                 .addComponent(labelCliente)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(painelCamposCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         painelClienteLayout.setVerticalGroup(
             painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,7 +340,7 @@ public class BancoClientes extends javax.swing.JFrame{
                 .addComponent(labelCliente)
                 .addGap(18, 18, 18)
                 .addComponent(painelCamposCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(painelCliente);
@@ -353,7 +350,7 @@ public class BancoClientes extends javax.swing.JFrame{
 
     private void buttonTodosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonTodosMouseClicked
         try {
-            mostraDados(ClienteDAO.getAllClientes());
+            mostraDados(VendaDAO.getAllVendas());
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
@@ -361,19 +358,11 @@ public class BancoClientes extends javax.swing.JFrame{
 
     private void buttonIDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonIDMouseClicked
         try {
-            mostraDados(ClienteDAO.getClienteById(textID.getText()));
+            mostraDados(VendaDAO.getVendaById(textID.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
         }
     }//GEN-LAST:event_buttonIDMouseClicked
-
-    private void buttonNomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonNomeMouseClicked
-        try {
-            mostraDados(ClienteDAO.getClienteByName(textNome.getText()));
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
-        }
-    }//GEN-LAST:event_buttonNomeMouseClicked
 
     private void buttonSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSairMouseClicked
         this.dispose();
@@ -419,13 +408,13 @@ public class BancoClientes extends javax.swing.JFrame{
         String oldId = idObj.toString();
         
         String id = tfID.getText();
-        String nome = tfNome.getText();
-        String endereco = tfEnd.getText();
-        String contato = tfCont.getText();
-        String cpfcnpj = tfCpfCnpj.getText();
+        int idCliente = ClienteDAO.getIdByName(comboBoxCliente.getSelectedItem().toString());
+        int idProduto = ProdutoDAO.getIdByName(comboBoxProduto.getSelectedItem().toString());
+        String qtd = tfQtd.getText();
+        String preco= tfPreco.getText();
         String obs = tfObs.getText();
         
-        boolean resp = ClienteDAO.updateCliente(id, nome, endereco, contato, cpfcnpj, obs, oldId);
+        boolean resp = VendaDAO.updateVenda(id, idCliente, idProduto, obs, qtd, preco, oldId);
         
         if(!resp){
             JOptionPane.showMessageDialog(null, "Erro de atualização.", "Erro de atualização", 0);
@@ -433,23 +422,24 @@ public class BancoClientes extends javax.swing.JFrame{
             JOptionPane.showMessageDialog(null, "Registro atualizado com sucesso.", "Atualizar registro", -1);
             
             tfID.setText("");
-            tfNome.setText("");
-            tfEnd.setText("");
-            tfCont.setText("");
-            tfCpfCnpj.setText("");
+            
+            tfQtd.setText("");
+            tfPreco.setText("");
             tfObs.setText("");
-        
+            
+            limparComboBoxes();
+            
             tfID.setEnabled(false);
-            tfNome.setEnabled(false);
-            tfEnd.setEnabled(false);
-            tfCont.setEnabled(false);
-            tfCpfCnpj.setEnabled(false);
+            comboBoxCliente.setEnabled(false);
+            comboBoxProduto.setEnabled(false);
+            tfQtd.setEnabled(false);
+            tfPreco.setEnabled(false);
             tfObs.setEnabled(false);
             buttonCancelar.setEnabled(false);
             buttonAtt.setEnabled(false);
             
             try {
-                mostraDados(ClienteDAO.getAllClientes());
+                mostraDados(VendaDAO.getAllVendas());
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro SQL ao montar tabela: " +ex, "Erro ao mostrar tabela", 0);
             }
@@ -462,17 +452,17 @@ public class BancoClientes extends javax.swing.JFrame{
 
     private void buttonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelarMouseClicked
         tfID.setText("");
-        tfNome.setText("");
-        tfEnd.setText("");
-        tfCont.setText("");
-        tfCpfCnpj.setText("");
+        
+        tfQtd.setText("");
+        tfPreco.setText("");
         tfObs.setText("");
         
+        limparComboBoxes();
+        
         tfID.setEnabled(false);
-        tfNome.setEnabled(false);
-        tfEnd.setEnabled(false);
-        tfCont.setEnabled(false);
-        tfCpfCnpj.setEnabled(false);
+        
+        tfQtd.setEnabled(false);
+        tfPreco.setEnabled(false);
         tfObs.setEnabled(false);
         buttonCancelar.setEnabled(false);
         buttonAtt.setEnabled(false);
@@ -490,24 +480,42 @@ public class BancoClientes extends javax.swing.JFrame{
         String id = idObj.toString();
         
         try {
+            popularComboBoxes();
             preencheCampos(id);
         } catch (SQLException ex) {
-            Logger.getLogger(BancoClientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BancoVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttonAlterarMouseClicked
+
+    private void buttonCalcularPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCalcularPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonCalcularPrecoActionPerformed
+
+    private void tfQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQtdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfQtdActionPerformed
+
+    private void buttonCalcularPrecoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCalcularPrecoMouseClicked
+        int qtd = Integer.parseInt(tfQtd.getText());
+        double pRevenda = ProdutoDAO.getPrecoRevendaByName(comboBoxProduto.getSelectedItem().toString());
+        
+        double total = qtd * pRevenda;
+        
+        tfPreco.setText(Double.toString(total));
+    }//GEN-LAST:event_buttonCalcularPrecoMouseClicked
     
     public void preencheCampos(String id) throws SQLException{
-        ResultSet rs = ClienteDAO.getClienteById(id);
+        ResultSet rs = VendaDAO.getVendaById(id);
         ResultSetMetaData rsmd = rs.getMetaData();
         ArrayList<String> reg = new ArrayList<>();
         
         rs.next();
         
         tfID.setEnabled(true);
-        tfNome.setEnabled(true);
-        tfEnd.setEnabled(true);
-        tfCont.setEnabled(true);
-        tfCpfCnpj.setEnabled(true);
+        comboBoxCliente.setEnabled(true);
+        comboBoxProduto.setEnabled(true);
+        tfQtd.setEnabled(true);
+        tfPreco.setEnabled(true);
         tfObs.setEnabled(true);
         buttonCancelar.setEnabled(true);
         buttonAtt.setEnabled(true);
@@ -517,11 +525,23 @@ public class BancoClientes extends javax.swing.JFrame{
             } while (rs.next());
         
         tfID.setText(reg.get(0));
-        tfNome.setText(reg.get(1));
-        tfEnd.setText(reg.get(2));
-        tfCont.setText(reg.get(3));
-        tfCpfCnpj.setText(reg.get(4));
-        tfObs.setText(reg.get(5));
+        for(int i = 0; i < comboBoxCliente.getItemCount(); i++){
+            if(reg.get(1).equals(comboBoxCliente.getItemAt(i))){
+                comboBoxCliente.setSelectedIndex(i);
+                break;
+            }
+        }
+        
+        for(int i = 0; i < comboBoxProduto.getItemCount(); i++){
+            if(reg.get(2).equals(comboBoxProduto.getItemAt(i))){
+                comboBoxProduto.setSelectedIndex(i);
+                break;
+            }
+        }
+        
+        tfObs.setText(reg.get(3));
+        tfQtd.setText(reg.get(4));
+        tfPreco.setText(reg.get(5));
           
     }
     
@@ -608,15 +628,16 @@ public class BancoClientes extends javax.swing.JFrame{
     private javax.swing.JButton buttonAlterar;
     private javax.swing.JButton buttonApagar;
     private javax.swing.JButton buttonAtt;
+    private javax.swing.JButton buttonCalcularPreco;
     private javax.swing.JButton buttonCancelar;
     private javax.swing.ButtonGroup buttonGroupFornecedor;
     private javax.swing.ButtonGroup buttonGrouptipoPes;
     private javax.swing.JButton buttonID;
-    private javax.swing.JButton buttonNome;
     private javax.swing.JButton buttonSair;
     private javax.swing.JButton buttonTodos;
+    private javax.swing.JComboBox<String> comboBoxCliente;
+    private javax.swing.JComboBox<String> comboBoxProduto;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -632,12 +653,32 @@ public class BancoClientes extends javax.swing.JFrame{
     private javax.swing.JPanel painelCliente;
     private javax.swing.JTable tabelaClientes;
     private javax.swing.JTextField textID;
-    private javax.swing.JTextField textNome;
-    private javax.swing.JTextField tfCont;
-    private javax.swing.JTextField tfCpfCnpj;
-    private javax.swing.JTextField tfEnd;
     private javax.swing.JTextField tfID;
-    private javax.swing.JTextField tfNome;
     private javax.swing.JTextArea tfObs;
+    private javax.swing.JTextField tfPreco;
+    private javax.swing.JTextField tfQtd;
     // End of variables declaration//GEN-END:variables
+
+    private void popularComboBoxes() {
+        if(comboBoxCliente.getItemCount() > 0 || comboBoxProduto.getItemCount() > 0){
+            return;
+        }
+        
+        ArrayList<String> clientes, produtos;
+        clientes = ClienteDAO.getAllClientesArray();
+        produtos = ProdutoDAO.getAllProdutosArray();
+        
+        clientes.forEach((cliente) -> {
+            comboBoxCliente.addItem(cliente);
+        });
+        
+        produtos.forEach((produto) -> {
+            comboBoxProduto.addItem(produto);
+        });
+    }
+    
+    private void limparComboBoxes(){
+        comboBoxCliente.removeAllItems();
+        comboBoxProduto.removeAllItems();
+    }
 }

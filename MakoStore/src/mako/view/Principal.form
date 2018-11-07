@@ -317,7 +317,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textNomeCliente">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textNomeCliente.setUI(new mako.controller.Watermark(&quot;Digite o nome do Cliente...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textNomeCliente.setUI(new mako.utils.Watermark(&quot;Digite o nome do Cliente...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelEndCliente">
@@ -330,7 +330,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textEndCliente">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textEndCliente.setUI(new mako.controller.Watermark(&quot;Digite o endere&#xe7;o do Cliente (rua, n&#xfa;mero, cep, cidade, estado)...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textEndCliente.setUI(new mako.utils.Watermark(&quot;Digite o endere&#xe7;o do Cliente (rua, n&#xfa;mero, cep, cidade, estado)...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelIdCliente">
@@ -343,7 +343,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textIdCliente">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIdCliente.setUI(new mako.controller.Watermark(&quot;Digite o ID do Cliente...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIdCliente.setUI(new mako.utils.Watermark(&quot;Digite o ID do Cliente...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelContatoCliente">
@@ -356,7 +356,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textContatoCliente">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textContatoCliente.setUI(new mako.controller.Watermark(&quot;Digite um n&#xfa;mero para contato com o Cliente. ex:(00)0000-0000&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textContatoCliente.setUI(new mako.utils.Watermark(&quot;Digite um n&#xfa;mero para contato com o Cliente. ex:(00)0000-0000&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelCpfCnpjCliente">
@@ -369,7 +369,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textCpfCnpj">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textCpfCnpj.setUI(new mako.controller.Watermark(&quot;Digite o CPF ou CNPJ do Cliente...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textCpfCnpj.setUI(new mako.utils.Watermark(&quot;Digite o CPF ou CNPJ do Cliente...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelObservacoesCliente">
@@ -649,7 +649,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textNomeFornecedor">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textNomeFornecedor.setUI(new mako.controller.Watermark(&quot;Digite o nome do Fornecedor...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textNomeFornecedor.setUI(new mako.utils.Watermark(&quot;Digite o nome do Fornecedor...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelEndFornecedor">
@@ -662,7 +662,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textEndFornecedor">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textEndFornecedor.setUI(new mako.controller.Watermark(&quot;Digite o endere&#xe7;o do Fornecedor...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textEndFornecedor.setUI(new mako.utils.Watermark(&quot;Digite o endere&#xe7;o do Fornecedor...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelIdFornecedor">
@@ -675,7 +675,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textIdFornecedor">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIdFornecedor.setUI(new mako.controller.Watermark(&quot;Digite o ID do Fornecedor...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIdFornecedor.setUI(new mako.utils.Watermark(&quot;Digite o ID do Fornecedor...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelContatoFornecedor">
@@ -688,7 +688,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textContatoFornecedor">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textContatoFornecedor.setUI(new mako.controller.Watermark(&quot;Digite um n&#xfa;mero para contato com o Fornecedor. ex:(00)0000-0000&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textContatoFornecedor.setUI(new mako.utils.Watermark(&quot;Digite um n&#xfa;mero para contato com o Fornecedor. ex:(00)0000-0000&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelPagFornecedor">
@@ -701,7 +701,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textPagFornecedor">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textPagFornecedor.setUI(new mako.controller.Watermark(&quot;Digite a p&#xe1;gina web do Fornecedor (caso exista).&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textPagFornecedor.setUI(new mako.utils.Watermark(&quot;Digite a p&#xe1;gina web do Fornecedor (caso exista).&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelObservacoesFornecedor">
@@ -1053,7 +1053,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textNomeProduto">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textNomeProduto.setUI(new mako.controller.Watermark(&quot;Digite o nome do Produto...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textNomeProduto.setUI(new mako.utils.Watermark(&quot;Digite o nome do Produto...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelNomeFornProduto">
@@ -1066,7 +1066,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textFornProduto">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textFornProduto.setUI(new mako.controller.Watermark(&quot;Digite o nome do Fornecedor deste Produto...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textFornProduto.setUI(new mako.utils.Watermark(&quot;Digite o nome do Fornecedor deste Produto...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelQtdProduto">
@@ -1087,7 +1087,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="textIDProduto">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.controller.Watermark(&quot;Digite o ID do Produto...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.utils.Watermark(&quot;Digite o ID do Produto...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelTipoProduto">
@@ -1302,18 +1302,18 @@
                                       <Component id="buttonCadastrarVenda" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="textIDVenda1" min="-2" pref="79" max="-2" attributes="0"/>
+                                      <Component id="textQtdProdutos" min="-2" pref="79" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="355" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="comboBoxClienteVenda2" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="comboBoxProdutoVenda" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="textIDVenda2" min="-2" pref="79" max="-2" attributes="0"/>
+                              <Component id="textPrecoTotal" min="-2" pref="79" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -1338,18 +1338,18 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelClienteVenda2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="comboBoxClienteVenda2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboBoxProdutoVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelClienteVenda3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textIDVenda1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textQtdProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelClienteVenda4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textIDVenda2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textPrecoTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1440,7 +1440,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIDVendaActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.controller.Watermark(&quot;Digite o ID da Venda...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.utils.Watermark(&quot;Digite o ID da Venda...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelClienteVenda">
@@ -1469,12 +1469,15 @@
                 <Property name="text" type="java.lang.String" value="Produto:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="comboBoxClienteVenda2">
+            <Component class="javax.swing.JComboBox" name="comboBoxProdutoVenda">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboBoxProdutoVendaItemStateChanged"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
@@ -1487,12 +1490,15 @@
                 <Property name="text" type="java.lang.String" value="Quantidade:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="textIDVenda1">
+            <Component class="javax.swing.JTextField" name="textQtdProdutos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIDVenda1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textQtdProdutosActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.controller.Watermark(&quot;Digite o ID da Venda...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.utils.Watermark(&quot;Digite o ID da Venda...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="labelClienteVenda4">
@@ -1503,21 +1509,25 @@
                 <Property name="text" type="java.lang.String" value="Pre&#xe7;o:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="textIDVenda2">
+            <Component class="javax.swing.JTextField" name="textPrecoTotal">
               <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIDVenda2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textPrecoTotalActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.controller.Watermark(&quot;Digite o ID da Venda...&quot;, true));"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textIDProduto.setUI(new mako.utils.Watermark(&quot;Digite o ID da Venda...&quot;, true));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Calcular Pre&#xe7;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -184,19 +184,19 @@ public class BancoFornecedores extends javax.swing.JFrame {
             }
         });
 
-        tfID.setUI(new mako.controller.Watermark("ID", true));
+        tfID.setUI(new mako.utils.Watermark("ID", true));
         tfID.setEnabled(false);
 
-        tfNome.setUI(new mako.controller.Watermark("Nome", true));
+        tfNome.setUI(new mako.utils.Watermark("Nome", true));
         tfNome.setEnabled(false);
 
-        tfEnd.setUI(new mako.controller.Watermark("Endereço", true));
+        tfEnd.setUI(new mako.utils.Watermark("Endereço", true));
         tfEnd.setEnabled(false);
 
-        tfCont.setUI(new mako.controller.Watermark("Contato", true));
+        tfCont.setUI(new mako.utils.Watermark("Contato", true));
         tfCont.setEnabled(false);
 
-        tfPagina.setUI(new mako.controller.Watermark("CPF/CNPJ", true));
+        tfPagina.setUI(new mako.utils.Watermark("CPF/CNPJ", true));
         tfPagina.setEnabled(false);
 
         buttonCancelar.setText("Cancelar");
