@@ -196,7 +196,7 @@ public class Principal extends javax.swing.JFrame {
 
         labelPrincipal.setFont(new java.awt.Font("Constantia", 0, 36)); // NOI18N
         labelPrincipal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelPrincipal.setText("Mako Store v.1.3.0");
+        labelPrincipal.setText("Mako Store v.2.0.1");
 
         botaoNovaCompra.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         botaoNovaCompra.setText("Nova Venda");
@@ -1319,6 +1319,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoNovaCompraMouseClicked
 
     private void buttonVoltarVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonVoltarVendaMouseClicked
+        limparComboBoxes();
+
         Container cards = getContentPane();
 
         CardLayout cl = (CardLayout) cards.getLayout();
@@ -1564,5 +1566,10 @@ public class Principal extends javax.swing.JFrame {
         clientes.forEach((nome) -> {
             comboBoxProdutoVenda.addItem(nome);
         });
+    }
+    
+        private void limparComboBoxes(){
+        comboBoxProdutoVenda.removeAllItems();
+        comboBoxClienteVenda.removeAllItems();
     }
 }
