@@ -318,6 +318,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(textAreaObsCliente);
 
         buttonrRelatorioC.setText("Relatório de Clientes");
+        buttonrRelatorioC.setEnabled(false);
         buttonrRelatorioC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonrRelatorioCMouseClicked(evt);
@@ -418,7 +419,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(apresentacaoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(painelCamposCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         getContentPane().add(painelCliente, "cardCadCliente");
@@ -522,6 +523,7 @@ public class Principal extends javax.swing.JFrame {
         labelTipoPesFornecedor.setText("Tipo da Pessoa:");
 
         buttonrRelatorioC1.setText("Relatório de Fornecedores");
+        buttonrRelatorioC1.setEnabled(false);
         buttonrRelatorioC1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonrRelatorioC1MouseClicked(evt);
@@ -659,7 +661,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(apresentacaoFornecedor)
                 .addGap(18, 18, 18)
                 .addComponent(painelCamposFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         getContentPane().add(painelFornecedor, "cardCadFornecedor");
@@ -756,6 +758,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         buttonrRelatorioC2.setText("Relatório de Produtos");
+        buttonrRelatorioC2.setEnabled(false);
         buttonrRelatorioC2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonrRelatorioC2MouseClicked(evt);

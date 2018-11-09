@@ -185,7 +185,7 @@
                   <Component id="apresentacaoCliente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="painelCamposCliente" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -432,6 +432,7 @@
             <Component class="javax.swing.JButton" name="buttonrRelatorioC">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Clientes"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonrRelatorioCMouseClicked"/>
@@ -477,7 +478,7 @@
                   <Component id="apresentacaoFornecedor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="painelCamposFornecedor" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -835,6 +836,7 @@
             <Component class="javax.swing.JButton" name="buttonrRelatorioC1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Fornecedores"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonrRelatorioC1MouseClicked"/>
@@ -1188,6 +1190,7 @@
             <Component class="javax.swing.JButton" name="buttonrRelatorioC2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Produtos"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonrRelatorioC2MouseClicked"/>
